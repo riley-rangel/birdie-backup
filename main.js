@@ -1,0 +1,200 @@
+var courses = [
+  {
+    id: 1,
+    name: 'Newport Beach Golf Course',
+    address: '3100 Irvine Ave',
+    city: 'Newport Beach',
+    state: 'CA',
+    zip: '92660',
+    openingYear: 1966,
+    usgaRating: 57.2,
+    parIndex: [3, 3, 3, 4, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3]
+  },
+  {
+    id: 2,
+    name: 'Rancho San Joaquin Golf Course',
+    address: 'One Ethel Coplen Way',
+    city: 'Irvine',
+    state: 'CA',
+    zip: '92612',
+    openingYear: 1964,
+    usgaRating: 70.8,
+    parIndex: [5, 3, 4, 4, 5, 4, 4, 3, 4, 4, 4, 5, 3, 4, 3, 4, 4, 5]
+  },
+  {
+    id: 3,
+    name: 'Strawberry Farms Golf Club',
+    address: '11 Strawberry Farm Rd',
+    city: 'Irvine',
+    state: 'CA',
+    zip: '92612',
+    openingYear: 1997,
+    usgaRating: 72.7,
+    parIndex: [4, 4, 3, 4, 4, 5, 3, 4, 5, 4, 3, 5, 4, 4, 3, 5, 3, 4]
+  },
+  {
+    id: 4,
+    name: 'Oak Creek Golf Club',
+    address: '1 Golf Club Dr',
+    city: 'Irvine',
+    state: 'CA',
+    zip: '92618',
+    openingYear: 1996,
+    usgaRating: 72.5,
+    parIndex: [4, 4, 3, 4, 4, 5, 3, 4, 4, 5, 3, 4, 4, 4, 4, 4, 3, 5]
+  },
+  {
+    id: 5,
+    name: 'Mile Square Golf Course',
+    address: '10401 Warner Ave',
+    city: 'Fountain Valley',
+    state: 'CA',
+    zip: '92708',
+    openingYear: 1969,
+    usgaRating: 71.5,
+    parIndex: [4, 4, 4, 5, 3, 4, 4, 3, 5, 5, 4, 4, 3, 4, 3, 4, 4, 5]
+  },
+  {
+    id: 6,
+    name: 'River View Golf Course',
+    address: '1800 W Santa Clara Ave',
+    city: 'Santa Ana',
+    state: 'CA',
+    zip: '92706',
+    openingYear: 1970,
+    usgaRating: 68.4,
+    parIndex: [4, 3, 3, 4, 5, 3, 4, 5, 3, 3, 4, 4, 5, 3, 5, 4, 5, 3]
+  },
+  {
+    id: 7,
+    name: 'Tustin Ranch Golf Club',
+    address: '12442 Tustin Ranch',
+    city: 'Tustin',
+    state: 'CA',
+    zip: '92782',
+    openingYear: 1989,
+    usgaRating: 73.5,
+    parIndex: [4, 5, 3, 4, 4, 3, 4, 4, 5, 5, 3, 4, 4, 4, 5, 4, 3, 4]
+  },
+  {
+    id: 8,
+    name: 'Pelican Hill Golf Club',
+    address: '22800 S Pelican Hill Rd',
+    city: 'Newport Beach',
+    state: 'CA',
+    zip: '92657',
+    openingYear: 1991,
+    usgaRating: 71.9,
+    parIndex: [4, 4, 4, 3, 4, 4, 3, 5, 4, 4, 4, 3, 3, 5, 4, 3, 5, 4]
+  },
+  {
+    id: 9,
+    name: 'Costa Mesa Golf Course',
+    address: '1701 Golf Course Dr',
+    city: 'Costa Mesa',
+    state: 'CA',
+    zip: '92626',
+    openingYear: 1967,
+    usgaRating: 70.5,
+    parIndex: [5, 5, 4, 3, 4, 5, 3, 4, 4, 4, 3, 4, 4, 5, 3, 4, 3, 5]
+  },
+  {
+    id: 10,
+    name: 'Willowick Golf Course',
+    address: '3017 W 5th St',
+    city: 'Santa Ana',
+    state: 'CA',
+    zip: '92703',
+    openingYear: 1929,
+    usgaRating: 67.7,
+    parIndex: [4, 3, 5, 3, 4, 5, 3, 4, 4, 5, 5, 3, 4, 4, 4, 4, 3, 4]
+  },
+  {
+    id: 11,
+    name: 'Dad Miller Golf Course',
+    address: '430 N Gilbert St',
+    city: 'Anaheim',
+    state: 'CA',
+    zip: '92801',
+    openingYear: 1961,
+    usgaRating: 67.8,
+    parIndex: [4, 4, 4, 4, 4, 4, 3, 5, 3, 5, 3, 4, 3, 4, 5, 3, 4, 5]
+  },
+  {
+    id: 12,
+    name: 'Coyote Hills Golf Course',
+    address: '1440 E Bastanchury Rd',
+    city: 'Fullerton',
+    state: 'CA',
+    zip: '92835',
+    openingYear: 1996,
+    usgaRating: 71.1,
+    parIndex: [4, 4, 3, 4, 4, 4, 4, 3, 4, 4, 5, 4, 4, 3, 5, 4, 3, 4]
+  },
+  {
+    id: 13,
+    name: 'Meadowlark Golf Course',
+    address: '16782 Graham St',
+    city: 'Huntington Beach',
+    state: 'CA',
+    zip: '92649',
+    openingYear: 1922,
+    usgaRating: 72.7,
+    parIndex: [4, 4, 4, 3, 4, 5, 3, 4, 4, 4, 4, 4, 3, 4, 4, 3, 4, 5]
+  },
+  {
+    id: 14,
+    name: 'Tijeras Creek Golf Club',
+    address: '29082 Tijeras Creek',
+    city: 'Rancho Santa Margarita',
+    state: 'CA',
+    zip: '92688',
+    openingYear: 1972,
+    usgaRating: 73.8,
+    parIndex: [5, 4, 4, 4, 3, 4, 3, 5, 4, 4, 5, 4, 5, 3, 4, 3, 4, 4]
+  },
+  {
+    id: 15,
+    name: 'Arroyo Trabuco Golf Club',
+    address: '26772 Avery Pkwy',
+    city: 'Mission Viejo',
+    state: 'CA',
+    zip: '92692',
+    openingYear: 2004,
+    usgaRating: 73.7,
+    parIndex: [4, 4, 5, 3, 4, 4, 5, 3, 4, 4, 3, 4, 3, 5, 4, 4, 4, 5]
+  },
+  {
+    id: 16,
+    name: 'Anaheim Hills Golf Course',
+    address: '6501 East Nohl Ranch Road',
+    city: 'Anaheim',
+    state: 'CA',
+    zip: '92807',
+    openingYear: 1972,
+    usgaRating: 69.6,
+    parIndex: [5, 4, 4, 4, 3, 4, 3, 4, 4, 4, 4, 5, 3, 4, 4, 4, 3, 5]
+  },
+  {
+    id: 17,
+    name: 'San Juan Hills Golf Club',
+    address: '32120 San Juan Creek Rd',
+    city: 'San Juan Capistrano',
+    state: 'CA',
+    zip: '92675',
+    openingYear: 1967,
+    usgaRating: 70.1,
+    parIndex: [4, 4, 4, 4, 4, 5, 3, 4, 3, 4, 4, 5, 4, 3, 4, 3, 5, 3]
+  },
+  {
+    id: 18,
+    name: 'Monarch Beach Golf Links',
+    address: '50 Monarch Beach Resort N',
+    city: 'Dana Point',
+    state: 'CA',
+    zip: '92629',
+    openingYear: 1983,
+    usgaRating: 72.5,
+    parIndex: [4, 4, 4, 3, 3, 4, 5, 4, 5, 4, 4, 5, 3, 4, 3, 4, 3, 4]
+  }
+]

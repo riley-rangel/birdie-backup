@@ -27,6 +27,7 @@ body {
   width: 56px;
   display: inline-block;
   background-color: green;
+  border-radius: 100%;
 }
 
 #title-text {
@@ -36,14 +37,17 @@ body {
   line-height: 56px;
   vertical-align: center;
   font-size: 24px;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .welcome-banner {
-  position: relative;
-  top: 56px;
+  margin-top: 56px;
+  margin-bottom: 0;
   height: 134px;
   width: 100%;
-  display: inline-block;
+  line-height: 134px;
+  vertical-align: center;
+  font-size: 36px;
 }
 
 .course-card {
@@ -59,7 +63,19 @@ body {
 }
 
 .card-image {
+  float: left;
   height: inherit;
+  z-index: 1;
+}
+
+.card-info {
+  position: absolute;
+  z-index: 2;
+  padding: 5px 10px;
+  height: 56px;
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(245, 245, 245, 0.8);
 }
 
 .footer {

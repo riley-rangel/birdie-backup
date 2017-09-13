@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 var courses = [
   {
     id: 1,
@@ -218,33 +217,14 @@ var courses = [
   }
 ]
 
-/*
-<!-- below will be in javascript -->
-<div id="main" class="container">
-  <p class="welcome-banner">Find a course to play</p>
-  <!-- start of loop interval -->
-  <div class="course-card z-depth-2">
-    <img class="card-image" src="images/newport-beach-gc.jpg" alt="" />
-    <div class="card-info z-depth-1">
-      <p>Newport Beach Golf Course</p>
-    </div>
-  </div>
-</div>
-<!-- end of loop interval -->
-<!-- above will be in javascript -->
-*/
-
-// calls 'renderWelcome' function and inserts before 'footer'
 var $footer = document.querySelector('.footer')
 document.body.insertBefore(renderWelcome(), $footer)
 
-// calls 'renderCourse' function and appends to 'main' div
 var $main = document.querySelector('#main')
 for (var i = 0; i < courses.length; i++) {
-  $main.append(renderCourses(courses[i]))
+  $main.append(renderCourseCard(courses[i]))
 }
 
-// renders the welcome banner
 function renderWelcome() {
   var $div = document.createElement('div')
   var $p = document.createElement('p')
@@ -258,34 +238,46 @@ function renderWelcome() {
   return $div
 }
 
-// renders the course 'cards'
-function renderCourses(courseData) {
-  var $card = document.createElement('div')
-  var $img = document.createElement('img')
-  var $info = document.createElement('div')
-  var $infoText = document.createElement('p')
-
-  $card.setAttribute('class', 'course-card z-depth-2')
-  $img.setAttribute('class', 'card-image')
-  $img.setAttribute('src', courseData.imgUrl) // in array
-  $img.setAttribute('alt', '')
-  $info.setAttribute('class', 'card-info z-depth-1')
-  $infoText.textContent = courseData.name // in array
-
-  $card.appendChild($img)
-  $card.appendChild($info)
-  $info.appendChild($infoText)
-
-  return $card
-}
-
-// calculates the par total for a course
-function par(course, number) {
-  var selection = course[number - 1].parIndex
+function par(course) {
+  var selection = course.parIndex
   var parTotal = 0
 
   for (var i = 0; i < selection.length; i++) {
     parTotal += selection[i]
   }
   return parTotal
+}
+
+function renderCourseCard(courseData) {
+  var $card = document.createElement('div')
+  var $img = document.createElement('img')
+  var $info = document.createElement('div')
+  var $infoText = document.createElement('p')
+  var parSum = par(courseData)
+
+  $card.setAttribute('class', 'course-card z-depth-2')
+  $img.setAttribute('class', 'card-image')
+  $img.setAttribute('src', courseData.imgUrl)
+  $img.setAttribute('alt', '')
+  $info.setAttribute('class', 'card-info z-depth-1')
+  $infoText.textContent = courseData.name + ' / ' + parSum
+
+  $card.appendChild($img)
+  $card.appendChild($info)
+  $info.appendChild($infoText)
+
+  return $card
+
+  /*
+  <div id="main" class="container">
+    <p class="welcome-banner">Find a course to play</p>
+
+    <div class="course-card z-depth-2">
+      <img class="card-image" src="images/newport-beach-gc.jpg" alt="" />
+      <div class="card-info z-depth-1">
+        <p>Newport Beach Golf Course</p>
+      </div>
+    </div>
+  </div>
+  */
 }

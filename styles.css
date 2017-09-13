@@ -21,6 +21,47 @@ body {
   top: 0;
 }
 
+.logo {
+  float: left;
+  height: 56px;
+  width: 56px;
+  display: inline-block;
+  background-color: green;
+}
+
+#title-text {
+  float: left;
+  margin-left: 20px;
+  display: inline-block;
+  line-height: 56px;
+  vertical-align: center;
+  font-size: 24px;
+}
+
+.welcome-banner {
+  position: relative;
+  top: 56px;
+  height: 134px;
+  width: 100%;
+  display: inline-block;
+}
+
+.course-card {
+  position: relative;
+  margin-right: 25px;
+  margin-bottom: 20px;
+  height: 300px;
+  width: 300px;
+  display: inline-block;
+  border-radius: 3px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.card-image {
+  height: inherit;
+}
+
 .footer {
   bottom: 0;
   box-shadow: 0 -4px 5px 0 rgba(0, 0, 0, 0.14), 0 -1px 10px 0 rgba(0, 0, 0, 0.12), 0 -2px 4px -1px rgba(0, 0, 0, 0.3);

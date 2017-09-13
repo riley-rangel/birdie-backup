@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 var courses = [
   {
     id: 1,
@@ -8,7 +9,8 @@ var courses = [
     zip: '92660',
     openingYear: 1966,
     usgaRating: 57.2,
-    parIndex: [3, 3, 3, 4, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3]
+    parIndex: [3, 3, 3, 4, 3, 3, 4, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3],
+    imgUrl: 'images/newport-beach-gc.jpg'
   },
   {
     id: 2,
@@ -19,7 +21,8 @@ var courses = [
     zip: '92612',
     openingYear: 1964,
     usgaRating: 70.8,
-    parIndex: [5, 3, 4, 4, 5, 4, 4, 3, 4, 4, 4, 5, 3, 4, 3, 4, 4, 5]
+    parIndex: [5, 3, 4, 4, 5, 4, 4, 3, 4, 4, 4, 5, 3, 4, 3, 4, 4, 5],
+    imgUrl: 'images/rancho-san-joaquin.jpg'
   },
   {
     id: 3,
@@ -30,7 +33,8 @@ var courses = [
     zip: '92612',
     openingYear: 1997,
     usgaRating: 72.7,
-    parIndex: [4, 4, 3, 4, 4, 5, 3, 4, 5, 4, 3, 5, 4, 4, 3, 5, 3, 4]
+    parIndex: [4, 4, 3, 4, 4, 5, 3, 4, 5, 4, 3, 5, 4, 4, 3, 5, 3, 4],
+    imgUrl: 'images/strawberry-farms-gc.jpg'
   },
   {
     id: 4,
@@ -41,7 +45,8 @@ var courses = [
     zip: '92618',
     openingYear: 1996,
     usgaRating: 72.5,
-    parIndex: [4, 4, 3, 4, 4, 5, 3, 4, 4, 5, 3, 4, 4, 4, 4, 4, 3, 5]
+    parIndex: [4, 4, 3, 4, 4, 5, 3, 4, 4, 5, 3, 4, 4, 4, 4, 4, 3, 5],
+    imgUrl: 'images/oak-creek-gc.jpg'
   },
   {
     id: 5,
@@ -52,7 +57,8 @@ var courses = [
     zip: '92708',
     openingYear: 1969,
     usgaRating: 71.5,
-    parIndex: [4, 4, 4, 5, 3, 4, 4, 3, 5, 5, 4, 4, 3, 4, 3, 4, 4, 5]
+    parIndex: [4, 4, 4, 5, 3, 4, 4, 3, 5, 5, 4, 4, 3, 4, 3, 4, 4, 5],
+    imgUrl: 'images/mile-square-gc.jpg'
   },
   {
     id: 6,
@@ -63,7 +69,8 @@ var courses = [
     zip: '92706',
     openingYear: 1970,
     usgaRating: 68.4,
-    parIndex: [4, 3, 3, 4, 5, 3, 4, 5, 3, 3, 4, 4, 5, 3, 5, 4, 5, 3]
+    parIndex: [4, 3, 3, 4, 5, 3, 4, 5, 3, 3, 4, 4, 5, 3, 5, 4, 5, 3],
+    imgUrl: 'images/river-view-gc.jpg'
   },
   {
     id: 7,
@@ -74,7 +81,8 @@ var courses = [
     zip: '92782',
     openingYear: 1989,
     usgaRating: 73.5,
-    parIndex: [4, 5, 3, 4, 4, 3, 4, 4, 5, 5, 3, 4, 4, 4, 5, 4, 3, 4]
+    parIndex: [4, 5, 3, 4, 4, 3, 4, 4, 5, 5, 3, 4, 4, 4, 5, 4, 3, 4],
+    imgUrl: 'images/tustin-ranch-gc.jpg'
   },
   {
     id: 8,
@@ -85,7 +93,8 @@ var courses = [
     zip: '92657',
     openingYear: 1991,
     usgaRating: 71.9,
-    parIndex: [4, 4, 4, 3, 4, 4, 3, 5, 4, 4, 4, 3, 3, 5, 4, 3, 5, 4]
+    parIndex: [4, 4, 4, 3, 4, 4, 3, 5, 4, 4, 4, 3, 3, 5, 4, 3, 5, 4],
+    imgUrl: 'images/pelican-hill-gc.jpg'
   },
   {
     id: 9,
@@ -96,7 +105,8 @@ var courses = [
     zip: '92626',
     openingYear: 1967,
     usgaRating: 70.5,
-    parIndex: [5, 5, 4, 3, 4, 5, 3, 4, 4, 4, 3, 4, 4, 5, 3, 4, 3, 5]
+    parIndex: [5, 5, 4, 3, 4, 5, 3, 4, 4, 4, 3, 4, 4, 5, 3, 4, 3, 5],
+    imgUrl: 'images/costa-mesa-gc.jpg'
   },
   {
     id: 10,
@@ -107,7 +117,8 @@ var courses = [
     zip: '92703',
     openingYear: 1929,
     usgaRating: 67.7,
-    parIndex: [4, 3, 5, 3, 4, 5, 3, 4, 4, 5, 5, 3, 4, 4, 4, 4, 3, 4]
+    parIndex: [4, 3, 5, 3, 4, 5, 3, 4, 4, 5, 5, 3, 4, 4, 4, 4, 3, 4],
+    imgUrl: 'images/willowick-gc.jpg'
   },
   {
     id: 11,
@@ -118,7 +129,8 @@ var courses = [
     zip: '92801',
     openingYear: 1961,
     usgaRating: 67.8,
-    parIndex: [4, 4, 4, 4, 4, 4, 3, 5, 3, 5, 3, 4, 3, 4, 5, 3, 4, 5]
+    parIndex: [4, 4, 4, 4, 4, 4, 3, 5, 3, 5, 3, 4, 3, 4, 5, 3, 4, 5],
+    imgUrl: 'images/dad-miller-gc.jpg'
   },
   {
     id: 12,
@@ -129,7 +141,8 @@ var courses = [
     zip: '92835',
     openingYear: 1996,
     usgaRating: 71.1,
-    parIndex: [4, 4, 3, 4, 4, 4, 4, 3, 4, 4, 5, 4, 4, 3, 5, 4, 3, 4]
+    parIndex: [4, 4, 3, 4, 4, 4, 4, 3, 4, 4, 5, 4, 4, 3, 5, 4, 3, 4],
+    imgUrl: 'images/coyote-hills-gc.jpg'
   },
   {
     id: 13,
@@ -140,7 +153,8 @@ var courses = [
     zip: '92649',
     openingYear: 1922,
     usgaRating: 72.7,
-    parIndex: [4, 4, 4, 3, 4, 5, 3, 4, 4, 4, 4, 4, 3, 4, 4, 3, 4, 5]
+    parIndex: [4, 4, 4, 3, 4, 5, 3, 4, 4, 4, 4, 4, 3, 4, 4, 3, 4, 5],
+    imgUrl: 'images/'
   },
   {
     id: 14,
@@ -151,7 +165,8 @@ var courses = [
     zip: '92688',
     openingYear: 1972,
     usgaRating: 73.8,
-    parIndex: [5, 4, 4, 4, 3, 4, 3, 5, 4, 4, 5, 4, 5, 3, 4, 3, 4, 4]
+    parIndex: [5, 4, 4, 4, 3, 4, 3, 5, 4, 4, 5, 4, 5, 3, 4, 3, 4, 4],
+    imgUrl: 'images/tijeras-creek-gc.jpg'
   },
   {
     id: 15,
@@ -162,7 +177,8 @@ var courses = [
     zip: '92692',
     openingYear: 2004,
     usgaRating: 73.7,
-    parIndex: [4, 4, 5, 3, 4, 4, 5, 3, 4, 4, 3, 4, 3, 5, 4, 4, 4, 5]
+    parIndex: [4, 4, 5, 3, 4, 4, 5, 3, 4, 4, 3, 4, 3, 5, 4, 4, 4, 5],
+    imgUrl: 'images/arroyo-trabuco-gc.jpg'
   },
   {
     id: 16,
@@ -173,7 +189,8 @@ var courses = [
     zip: '92807',
     openingYear: 1972,
     usgaRating: 69.6,
-    parIndex: [5, 4, 4, 4, 3, 4, 3, 4, 4, 4, 4, 5, 3, 4, 4, 4, 3, 5]
+    parIndex: [5, 4, 4, 4, 3, 4, 3, 4, 4, 4, 4, 5, 3, 4, 4, 4, 3, 5],
+    imgUrl: 'images/anaheim-hills-gc.jpg'
   },
   {
     id: 17,
@@ -184,7 +201,8 @@ var courses = [
     zip: '92675',
     openingYear: 1967,
     usgaRating: 70.1,
-    parIndex: [4, 4, 4, 4, 4, 5, 3, 4, 3, 4, 4, 5, 4, 3, 4, 3, 5, 3]
+    parIndex: [4, 4, 4, 4, 4, 5, 3, 4, 3, 4, 4, 5, 4, 3, 4, 3, 5, 3],
+    imgUrl: 'images/san-juan-hills-gc.jpg'
   },
   {
     id: 18,
@@ -195,6 +213,17 @@ var courses = [
     zip: '92629',
     openingYear: 1983,
     usgaRating: 72.5,
-    parIndex: [4, 4, 4, 3, 3, 4, 5, 4, 5, 4, 4, 5, 3, 4, 3, 4, 3, 4]
+    parIndex: [4, 4, 4, 3, 3, 4, 5, 4, 5, 4, 4, 5, 3, 4, 3, 4, 3, 4],
+    imgUrl: 'images/monarch-beach-gc.jpg'
   }
 ]
+
+function par(course, number) {
+  var selection = course[number - 1].parIndex
+  var parTotal = 0
+
+  for (var i = 0; i < selection.length; i++) {
+    parTotal += selection[i]
+  }
+  return parTotal
+}

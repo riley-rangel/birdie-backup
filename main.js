@@ -22,7 +22,7 @@ var courses = [
     openingYear: 1964,
     usgaRating: 70.8,
     parIndex: [5, 3, 4, 4, 5, 4, 4, 3, 4, 4, 4, 5, 3, 4, 3, 4, 4, 5],
-    imgUrl: 'images/rancho-san-joaquin.jpg'
+    imgUrl: 'images/rancho-san-joaquin-gc.jpg'
   },
   {
     id: 3,
@@ -154,7 +154,7 @@ var courses = [
     openingYear: 1922,
     usgaRating: 72.7,
     parIndex: [4, 4, 4, 3, 4, 5, 3, 4, 4, 4, 4, 4, 3, 4, 4, 3, 4, 5],
-    imgUrl: 'images/'
+    imgUrl: 'images/meadowlark-gc.jpg'
   },
   {
     id: 14,
@@ -218,6 +218,68 @@ var courses = [
   }
 ]
 
+/*
+<!-- below will be in javascript -->
+<div id="main" class="container">
+  <p class="welcome-banner">Find a course to play</p>
+  <!-- start of loop interval -->
+  <div class="course-card z-depth-2">
+    <img class="card-image" src="images/newport-beach-gc.jpg" alt="" />
+    <div class="card-info z-depth-1">
+      <p>Newport Beach Golf Course</p>
+    </div>
+  </div>
+</div>
+<!-- end of loop interval -->
+<!-- above will be in javascript -->
+*/
+
+// calls 'renderWelcome' function and inserts before 'footer'
+var $footer = document.querySelector('.footer')
+document.body.insertBefore(renderWelcome(), $footer)
+
+// calls 'renderCourse' function and appends to 'main' div
+var $main = document.querySelector('#main')
+for (var i = 0; i < courses.length; i++) {
+  $main.append(renderCourses(courses[i]))
+}
+
+// renders the welcome banner
+function renderWelcome() {
+  var $div = document.createElement('div')
+  var $p = document.createElement('p')
+
+  $div.setAttribute('class', 'container')
+  $div.setAttribute('id', 'main')
+  $p.setAttribute('class', 'welcome-banner')
+  $p.textContent = 'Find a course to play'
+  $div.appendChild($p)
+
+  return $div
+}
+
+// renders the course 'cards'
+function renderCourses(courseData) {
+  var $card = document.createElement('div')
+  var $img = document.createElement('img')
+  var $info = document.createElement('div')
+  var $infoText = document.createElement('p')
+
+  $card.setAttribute('class', 'course-card z-depth-2')
+  $img.setAttribute('class', 'card-image')
+  $img.setAttribute('src', courseData.imgUrl) // in array
+  $img.setAttribute('alt', '')
+  $info.setAttribute('class', 'card-info z-depth-1')
+  $infoText.textContent = courseData.name // in array
+
+  $card.appendChild($img)
+  $card.appendChild($info)
+  $info.appendChild($infoText)
+
+  return $card
+}
+
+// calculates the par total for a course
 function par(course, number) {
   var selection = course[number - 1].parIndex
   var parTotal = 0

@@ -292,3 +292,11 @@ function emptyElement(element) {
   }
 }
 */
+
+function toggleElement(element) {
+  element.classList.toggle('hidden')
+}
+
+// thinking about how to add event listeners to all cards.
+// should query doc by class and return array of objects.
+// start there, see if we can come up with something.

@@ -281,3 +281,14 @@ function renderCourseCard(courseData) {
   </div>
   */
 }
+
+/*
+function emptyElement(element) {
+  var children = element.childNodes
+  var number = children.length
+
+  for (var i = 0; i < number; i++) {
+    element.removeChild(children[0])
+  }
+}
+*/

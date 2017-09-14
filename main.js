@@ -226,9 +226,9 @@ for (var i = 0; i < courses.length; i++) {
 }
 
 $main.addEventListener('click', function () {
-  // toggleHide($main)
   var $targetCard = event.target.closest('.course-card')
   if ($targetCard !== null) {
+    toggleHide($main)
     var dataNum = $targetCard.getAttribute('data-number')
     console.log(dataNum)
   }
@@ -292,8 +292,7 @@ function renderCourseCard(courseData) {
   */
 }
 
-/*
+
 function toggleHide(element) {
   element.classList.toggle('hidden')
 }
-*/

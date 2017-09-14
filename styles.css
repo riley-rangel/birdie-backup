@@ -7,6 +7,10 @@ body {
   background-color: #f5f5f5;
 }
 
+p {
+  font-size: 20px;
+}
+
 .header,
 .footer {
   position: fixed;
@@ -38,7 +42,7 @@ body {
   line-height: 56px;
   vertical-align: center;
   font-size: 24px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .welcome-banner {
@@ -49,6 +53,17 @@ body {
   line-height: 134px;
   vertical-align: center;
   font-size: 36px;
+}
+
+.address-card {
+  float: right;
+  height: 300px;
+  width: calc(100% - 425px);
+  margin-bottom: 20px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.87);
 }
 
 .course-card {
@@ -80,6 +95,44 @@ body {
   background: rgba(245, 245, 245, 0.8);
 }
 
+.detail-card {
+  margin-bottom: 20px;
+  padding: 1.5rem 2rem 3rem;
+  height: auto;
+  width: 100%;
+  display: inline-block;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-sizing: border-box;
+}
+
+.highlight-banner {
+  height: 56px;
+  width: 100%;
+}
+
+.highlight-title {
+  margin-left: calc((100% - 600px - 0.5rem) / 4);
+  width: 200px;
+  display: inline-block;
+  line-height: 56px;
+  text-align: center;
+}
+
+.highlight {
+  float: left;
+  margin-top: 1rem;
+  margin-left: calc((100% - 600px) / 4);
+  height: 200px;
+  width: 200px;
+  background-color: #c06999;
+  border-radius: 100%;
+  color: rgba(255, 255, 255, 0.87);
+  font-size: 60px;
+  line-height: 200px;
+  text-align: center;
+}
+
 .footer {
   bottom: 0;
   box-shadow: 0 -4px 5px 0 rgba(0, 0, 0, 0.14), 0 -1px 10px 0 rgba(0, 0, 0, 0.12), 0 -2px 4px -1px rgba(0, 0, 0, 0.3);
@@ -87,4 +140,8 @@ body {
 
 .hidden {
   display: none;
+}
+
+.center-text {
+  text-align: center;
 }

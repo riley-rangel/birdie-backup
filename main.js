@@ -315,6 +315,24 @@ function toggleHide(element) {
 }
 
 /*
+function renderDetails(courseData) {
+  $div = document.createElement('div')
+  $welcome = document.createElement('p')
+  $img = document.createElement('img')
+  $addressCard = document.createElement('div')
+  $name = document.createElement('h4')
+  $address = document.createElement('h5')
+  $highlightCard = document.createElement('div')
+  $highlightBanner = document.createElement('div')
+  $highlightTitle1 = document.createElement('p')
+  $highlightTitle2 = document.createElement('p')
+  $highlightTitle2 = document.createElement('p')
+  $highlight1 = document.createElement('div')
+  $highlight2 = document.createElement('div')
+  $highlight3 = document.createElement('div')
+
+}
+
 <div id="main" class="container">
   <p class="welcome-banner">Course details</p>
   <div class="course-card z-depth-2">
@@ -347,5 +365,4 @@ function toggleHide(element) {
       putter.</p>
   </div>
 </div>
-
 */

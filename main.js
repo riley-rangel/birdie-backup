@@ -225,6 +225,15 @@ for (var i = 0; i < courses.length; i++) {
   $main.append(renderCourseCard(courses[i]))
 }
 
+$main.addEventListener('click', function () {
+  // toggleHide($main)
+  var $targetCard = event.target.closest('.course-card')
+  if ($targetCard !== null) {
+    var dataNum = $targetCard.getAttribute('data-number')
+    console.log(dataNum)
+  }
+})
+
 function renderWelcome() {
   var $div = document.createElement('div')
   var $p = document.createElement('p')
@@ -256,6 +265,7 @@ function renderCourseCard(courseData) {
   var parSum = par(courseData)
 
   $card.setAttribute('class', 'course-card z-depth-2')
+  $card.setAttribute('data-number', courseData.id)
   $img.setAttribute('class', 'card-image')
   $img.setAttribute('src', courseData.imgUrl)
   $img.setAttribute('alt', '')
@@ -283,20 +293,7 @@ function renderCourseCard(courseData) {
 }
 
 /*
-function emptyElement(element) {
-  var children = element.childNodes
-  var number = children.length
-
-  for (var i = 0; i < number; i++) {
-    element.removeChild(children[0])
-  }
-}
-*/
-
-function toggleElement(element) {
+function toggleHide(element) {
   element.classList.toggle('hidden')
 }
-
-// thinking about how to add event listeners to all cards.
-// should query doc by class and return array of objects.
-// start there, see if we can come up with something.
+*/

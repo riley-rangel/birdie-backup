@@ -249,7 +249,14 @@ $main.addEventListener('click', function () {
     toggleHide($main)
     var dataNum = $targetCard.getAttribute('data-number')
     document.body.insertBefore(renderDetails(courses[dataNum - 1]), $footer)
-    renderHome()
+    document.body.appendChild(renderHome(dataNum))
+    var $homeButton = document.querySelector('.home-button')
+    $homeButton.addEventListener('click', function () {
+      var $dataNum = event.target.getAttribute('data-number')
+      resetMain($dataNum)
+      toggleHide($main)
+      $homeButton.remove()
+    })
   }
 })
 
@@ -283,7 +290,7 @@ function renderCourseCard(courseData) {
   var $infoText = document.createElement('p')
   var parSum = par(courseData)
 
-  $card.setAttribute('class', 'course-card z-depth-2')
+  $card.setAttribute('class', 'course-card z-depth-2 hover')
   $card.setAttribute('data-number', courseData.id)
   $img.setAttribute('class', 'card-image')
   $img.setAttribute('src', courseData.imgUrl)
@@ -300,6 +307,11 @@ function renderCourseCard(courseData) {
 
 function toggleHide(element) {
   element.classList.toggle('hidden')
+}
+
+function resetMain(idNum) {
+  var $pick = document.querySelector('#main-' + idNum)
+  $pick.remove()
 }
 
 function renderDetails(courseData) {
@@ -330,6 +342,7 @@ function renderDetails(courseData) {
   $img.setAttribute('class', 'card-image')
   $img.setAttribute('src', courseData.imgUrl)
   $img.setAttribute('alt', '')
+  $img.setAttribute('style', 'cursor: default')
   $addressCard.setAttribute('class', 'address-card z-depth-2')
   $name.setAttribute('class', 'center-text')
   $name.textContent = courseData.name
@@ -375,8 +388,10 @@ function renderDetails(courseData) {
   return $div
 }
 
-function renderHome() {
+function renderHome(idNum) {
   var $home = document.createElement('div')
-  $home.setAttribute('class', 'home-button')
+  $home.setAttribute('class', 'home-button z-depth-2')
+  $home.setAttribute('data-number', idNum)
+  $home.textContent = 'Home'
   return $home
 }

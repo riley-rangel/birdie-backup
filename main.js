@@ -235,6 +235,8 @@ var courses = [
   }
 ]
 
+var $scorecard = document.querySelector('.scorecard')
+
 var $footer = document.querySelector('.footer')
 document.body.insertBefore(renderWelcome('Find a course to play'), $footer)
 
@@ -255,6 +257,14 @@ $main.addEventListener('click', function () {
       var $dataNum = event.target.getAttribute('data-number')
       resetMain($dataNum)
       toggleHide($main)
+      $homeButton.remove()
+    })
+    var $startButton = document.querySelector('.start-button')
+    $startButton.addEventListener('click', function () {
+      var $dataNum = event.target.getAttribute('data-number')
+      var $detailMain = document.querySelector('#main-' + $dataNum)
+      toggleHide($detailMain)
+      toggleHide($scorecard)
       $homeButton.remove()
     })
   }
@@ -354,6 +364,7 @@ function renderDetails(courseData) {
   $address2.textContent = courseData.city + ', ' + courseData.state + ' ' +
     courseData.zip
   $start.setAttribute('class', 'start-button z-depth-2')
+  $start.setAttribute('data-number', courseData.id)
   $start.textContent = 'Play'
   $highlightCard.setAttribute('class', 'detail-card z-depth-2')
   $highlightBanner.setAttribute('class', 'highlight-banner')

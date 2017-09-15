@@ -264,6 +264,7 @@ $main.addEventListener('click', function () {
       var $dataNum = event.target.getAttribute('data-number')
       var $detailMain = document.querySelector('#main-' + $dataNum)
       toggleHide($detailMain)
+      fillScorecard($dataNum)
       toggleHide($scorecard)
       $homeButton.remove()
     })
@@ -288,6 +289,16 @@ function par(course) {
   var parTotal = 0
 
   for (var i = 0; i < selection.length; i++) {
+    parTotal += selection[i]
+  }
+  return parTotal
+}
+
+function parRange(course, begHole, endHole) {
+  var selection = course.parIndex
+  var parTotal = 0
+
+  for (var i = (begHole - 1); i < endHole; i++) {
     parTotal += selection[i]
   }
   return parTotal
@@ -413,4 +424,18 @@ function renderHome(idNum) {
   $home.setAttribute('data-number', idNum)
   $home.textContent = 'Home'
   return $home
+}
+
+function fillScorecard(idNum) {
+  var $formPar = document.querySelectorAll('.form-par')
+  var $formRender = document.querySelectorAll('.form-render')
+  var course = courses[idNum - 1]
+
+  for (var i = 0; i < $formPar.length; i++) {
+    $formPar[i].textContent = course.parIndex[i]
+  }
+  $formRender[0].textContent = course.name
+  $formRender[1].textContent = par(course)
+  $formRender[2].textContent = parRange(course, 1, 9)
+  $formRender[3].textContent = parRange(course, 10, 18)
 }

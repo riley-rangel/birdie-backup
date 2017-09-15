@@ -248,7 +248,7 @@ $main.addEventListener('click', function () {
   if ($targetCard !== null) {
     toggleHide($main)
     var dataNum = $targetCard.getAttribute('data-number')
-    console.log(dataNum)
+    document.body.insertBefore(renderDetails(courses[dataNum - 1]), $footer)
   }
 })
 
@@ -295,45 +295,87 @@ function renderCourseCard(courseData) {
   $info.appendChild($infoText)
 
   return $card
-
-  /*
-  <div id="main" class="container">
-    <p class="welcome-banner">Find a course to play</p>
-
-    <div class="course-card z-depth-2">
-      <img class="card-image" src="images/newport-beach-gc.jpg" alt="" />
-      <div class="card-info z-depth-1">
-        <p>Newport Beach Golf Course</p>
-      </div>
-    </div>
-  </div>
-  */
 }
 
 function toggleHide(element) {
   element.classList.toggle('hidden')
 }
 
-/*
 function renderDetails(courseData) {
-  $div = document.createElement('div')
-  $welcome = document.createElement('p')
-  $img = document.createElement('img')
-  $addressCard = document.createElement('div')
-  $name = document.createElement('h4')
-  $address = document.createElement('h5')
-  $highlightCard = document.createElement('div')
-  $highlightBanner = document.createElement('div')
-  $highlightTitle1 = document.createElement('p')
-  $highlightTitle2 = document.createElement('p')
-  $highlightTitle2 = document.createElement('p')
-  $highlight1 = document.createElement('div')
-  $highlight2 = document.createElement('div')
-  $highlight3 = document.createElement('div')
+  var $div = document.createElement('div')
+  var $welcome = document.createElement('p')
+  var $imgCard = document.createElement('div')
+  var $img = document.createElement('img')
+  var $addressCard = document.createElement('div')
+  var $name = document.createElement('h4')
+  var $address = document.createElement('h5')
+  var $highlightCard = document.createElement('div')
+  var $highlightBanner = document.createElement('div')
+  var $highlightTitle1 = document.createElement('p')
+  var $highlightTitle2 = document.createElement('p')
+  var $highlightTitle3 = document.createElement('p')
+  var $highlight1 = document.createElement('div')
+  var $highlight2 = document.createElement('div')
+  var $highlight3 = document.createElement('div')
+  var $descripCard = document.createElement('div')
+  var $about = document.createElement('h5')
+  var $descripText = document.createElement('p')
 
+  $div.setAttribute('id', 'main-' + courseData.id)
+  $div.setAttribute('class', 'container')
+  $welcome.setAttribute('class', 'welcome-banner')
+  $welcome.textContent = 'Course details'
+  $imgCard.setAttribute('class', 'course-card z-depth-2')
+  $img.setAttribute('class', 'card-image')
+  $img.setAttribute('src', courseData.imgUrl)
+  $img.setAttribute('alt', '')
+  $addressCard.setAttribute('class', 'address-card z-depth-2')
+  $name.setAttribute('class', 'center-text')
+  $name.textContent = courseData.name
+  $address.setAttribute('class', 'center-text')
+  $address.textContent = courseData.address + ' ' + courseData.city + ', ' +
+    courseData.state + ' ' + courseData.zip
+  $highlightCard.setAttribute('class', 'detail-card z-depth-2')
+  $highlightBanner.setAttribute('class', 'highlight-banner')
+  $highlightTitle1.setAttribute('class', 'highlight-title')
+  $highlightTitle1.textContent = 'Course Par'
+  $highlightTitle2.setAttribute('class', 'highlight-title')
+  $highlightTitle2.textContent = 'Established'
+  $highlightTitle3.setAttribute('class', 'highlight-title')
+  $highlightTitle3.textContent = 'Course Rating'
+  $highlight1.setAttribute('class', 'highlight z-depth-4')
+  $highlight1.textContent = par(courseData)
+  $highlight2.setAttribute('class', 'highlight z-depth-4')
+  $highlight2.textContent = courseData.openingYear
+  $highlight3.setAttribute('class', 'highlight z-depth-4')
+  $highlight3.textContent = courseData.usgaRating
+  $descripCard.setAttribute('class', 'detail-card z-depth-2')
+  $about.textContent = 'About ' + courseData.name
+  $descripText.textContent = courseData.description
+
+  $div.appendChild($welcome)
+  $div.appendChild($imgCard)
+  $imgCard.appendChild($img)
+  $div.appendChild($addressCard)
+  $addressCard.appendChild($name)
+  $addressCard.appendChild($address)
+  $div.appendChild($highlightCard)
+  $highlightCard.appendChild($highlightBanner)
+  $highlightBanner.appendChild($highlightTitle1)
+  $highlightBanner.appendChild($highlightTitle2)
+  $highlightBanner.appendChild($highlightTitle3)
+  $highlightCard.appendChild($highlight1)
+  $highlightCard.appendChild($highlight2)
+  $highlightCard.appendChild($highlight3)
+  $div.appendChild($descripCard)
+  $descripCard.appendChild($about)
+  $descripCard.appendChild($descripText)
+
+  return $div
 }
 
-<div id="main" class="container">
+/*
+<div id="main-'id#'" class="container">
   <p class="welcome-banner">Course details</p>
   <div class="course-card z-depth-2">
     <img class="card-image" src="images/newport-beach-gc.jpg" alt="" />

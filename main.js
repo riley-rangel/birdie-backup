@@ -249,6 +249,7 @@ $main.addEventListener('click', function () {
     toggleHide($main)
     var dataNum = $targetCard.getAttribute('data-number')
     document.body.insertBefore(renderDetails(courses[dataNum - 1]), $footer)
+    renderHome()
   }
 })
 
@@ -374,37 +375,8 @@ function renderDetails(courseData) {
   return $div
 }
 
-/*
-<div id="main-'id#'" class="container">
-  <p class="welcome-banner">Course details</p>
-  <div class="course-card z-depth-2">
-    <img class="card-image" src="images/newport-beach-gc.jpg" alt="" />
-  </div>
-  <div class="address-card z-depth-2">
-    <h4 class="center-text">Newport Beach Golf Course</h4>
-    <h5 class="center-text">3100 Irvine Ave Newport Beach, CA 92660</h5>
-  </div>
-  <div class="detail-card z-depth-2">
-    <div class="highlight-banner">
-      <p class="highlight-title">Course Par</p>
-      <p class="highlight-title">Established</p>
-      <p class="highlight-title">Course Rating</p>
-    </div>
-    <div class="highlight z-depth-4">59</div>
-    <div class="highlight z-depth-4">1966</div>
-    <div class="highlight z-depth-4">57.2</div>
-  </div>
-  <div class="detail-card z-depth-2">
-    <h5>About Newport Beach Golf Course</h5>
-    <p>Newport Beach Golf Course is an 18 hole executive golf course
-      conveniently located between the 55 and 73 freeways, behind John Wayne
-      Airport. Our unique course offers players two distinctly different
-      9 holes. Players will enjoy our new, state of the art golf mats on our
-      course and the practice range. Hit onto our lovely greens late into the
-      night as the course is lighted for night play. Sharpen your short game
-      skills on our practice chipping green that allows both rough and fringe
-      chipping. Then use our 9 hole putting green to fine tune your favorite
-      putter.</p>
-  </div>
-</div>
-*/
+function renderHome() {
+  var $home = document.createElement('div')
+  $home.setAttribute('class', 'home-button')
+  return $home
+}

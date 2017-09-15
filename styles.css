@@ -18,7 +18,7 @@ p {
   height: 56px;
   width: 100%;
   box-sizing: border-box;
-  background-color: #66bb6a;
+  background-color: #4caf50;
   z-index: 100;
 }
 
@@ -125,9 +125,9 @@ p {
   margin-left: calc((100% - 600px) / 4);
   height: 200px;
   width: 200px;
-  background-color: #c06999;
+  background-color: #80e27e;
   border-radius: 100%;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(0, 0, 0, 0.6);
   font-size: 60px;
   line-height: 200px;
   text-align: center;
@@ -154,7 +154,7 @@ p {
   width: 125px;
   border-radius: 100%;
   cursor: pointer;
-  background-color: #3d9b43;
+  background-color: #087f23;
   color: rgba(255, 255, 255, 0.87);
   line-height: 125px;
   font-size: 24px;
@@ -162,8 +162,21 @@ p {
   z-index: 101;
 }
 
+.start-button {
+  margin: 0 auto;
+  height: 125px;
+  width: 125px;
+  border-radius: 100%;
+  cursor: pointer;
+  background-color: #6a1b9a;
+  color: rgba(255, 255, 255, 0.87);
+  line-height: 125px;
+  font-size: 24px;
+  text-align: center;
+}
+
 .home-button:hover {
-  background-color: #66bb6c;
+  background-color: #4caf50;
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
 }
 

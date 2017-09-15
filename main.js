@@ -322,6 +322,8 @@ function renderDetails(courseData) {
   var $addressCard = document.createElement('div')
   var $name = document.createElement('h4')
   var $address = document.createElement('h5')
+  var $address2 = document.createElement('h5')
+  var $start = document.createElement('div')
   var $highlightCard = document.createElement('div')
   var $highlightBanner = document.createElement('div')
   var $highlightTitle1 = document.createElement('p')
@@ -347,8 +349,12 @@ function renderDetails(courseData) {
   $name.setAttribute('class', 'center-text')
   $name.textContent = courseData.name
   $address.setAttribute('class', 'center-text')
-  $address.textContent = courseData.address + ' ' + courseData.city + ', ' +
-    courseData.state + ' ' + courseData.zip
+  $address.textContent = courseData.address
+  $address2.setAttribute('class', 'center-text')
+  $address2.textContent = courseData.city + ', ' + courseData.state + ' ' +
+    courseData.zip
+  $start.setAttribute('class', 'start-button z-depth-2')
+  $start.textContent = 'Play'
   $highlightCard.setAttribute('class', 'detail-card z-depth-2')
   $highlightBanner.setAttribute('class', 'highlight-banner')
   $highlightTitle1.setAttribute('class', 'highlight-title')
@@ -373,6 +379,8 @@ function renderDetails(courseData) {
   $div.appendChild($addressCard)
   $addressCard.appendChild($name)
   $addressCard.appendChild($address)
+  $addressCard.appendChild($address2)
+  $addressCard.appendChild($start)
   $div.appendChild($highlightCard)
   $highlightCard.appendChild($highlightBanner)
   $highlightBanner.appendChild($highlightTitle1)

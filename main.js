@@ -344,7 +344,7 @@ function renderDetails(courseData) {
   var $name = document.createElement('h4')
   var $address = document.createElement('h5')
   var $address2 = document.createElement('h5')
-  var $start = document.createElement('div')
+  var $start = document.createElement('button')
   var $highlightCard = document.createElement('div')
   var $highlightBanner = document.createElement('div')
   var $highlightTitle1 = document.createElement('p')
@@ -374,7 +374,7 @@ function renderDetails(courseData) {
   $address2.setAttribute('class', 'center-text')
   $address2.textContent = courseData.city + ', ' + courseData.state + ' ' +
     courseData.zip
-  $start.setAttribute('class', 'start-button z-depth-2')
+  $start.setAttribute('class', 'start-button button z-depth-4')
   $start.setAttribute('data-number', courseData.id)
   $start.textContent = 'Play'
   $highlightCard.setAttribute('class', 'detail-card z-depth-2')
@@ -385,11 +385,11 @@ function renderDetails(courseData) {
   $highlightTitle2.textContent = 'Established'
   $highlightTitle3.setAttribute('class', 'highlight-title')
   $highlightTitle3.textContent = 'Course Rating'
-  $highlight1.setAttribute('class', 'highlight z-depth-4')
+  $highlight1.setAttribute('class', 'highlight z-depth-2')
   $highlight1.textContent = par(courseData)
-  $highlight2.setAttribute('class', 'highlight z-depth-4')
+  $highlight2.setAttribute('class', 'highlight z-depth-2')
   $highlight2.textContent = courseData.openingYear
-  $highlight3.setAttribute('class', 'highlight z-depth-4')
+  $highlight3.setAttribute('class', 'highlight z-depth-2')
   $highlight3.textContent = courseData.usgaRating
   $descripCard.setAttribute('class', 'detail-card z-depth-2')
   $about.textContent = 'About ' + courseData.name
@@ -419,8 +419,8 @@ function renderDetails(courseData) {
 }
 
 function renderHome(idNum) {
-  var $home = document.createElement('div')
-  $home.setAttribute('class', 'home-button z-depth-2')
+  var $home = document.createElement('button')
+  $home.setAttribute('class', 'home-button  button z-depth-4')
   $home.setAttribute('data-number', idNum)
   $home.textContent = 'Home'
   return $home

@@ -429,6 +429,7 @@ function renderHome(idNum) {
 function fillScorecard(idNum) {
   var $formPar = document.querySelectorAll('.form-par')
   var $formRender = document.querySelectorAll('.form-render')
+  var $formCalc = document.querySelectorAll('.form-calc')
   var course = courses[idNum - 1]
 
   for (var i = 0; i < $formPar.length; i++) {
@@ -438,4 +439,19 @@ function fillScorecard(idNum) {
   $formRender[1].textContent = par(course)
   $formRender[2].textContent = parRange(course, 1, 9)
   $formRender[3].textContent = parRange(course, 10, 18)
+  $scorecard.addEventListener('change', function () {
+    $formCalc[0].textContent = calcScorecard('.front-nine')
+    $formCalc[1].textContent = calcScorecard('.back-nine')
+    $formCalc[2].textContent = calcScorecard('.player-par')
+  })
+}
+
+function calcScorecard(className) {
+  var $scores = document.querySelectorAll(className)
+  var scoreTotal = 0
+
+  for (i = 0; i < $scores.length; i++) {
+    scoreTotal += Number($scores[i].value)
+  }
+  return scoreTotal
 }

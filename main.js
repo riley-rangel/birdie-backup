@@ -235,6 +235,8 @@ var courses = [
   }
 ]
 
+var roundsData = []
+
 var $scorecard = document.querySelector('.scorecard')
 
 var $footer = document.querySelector('.footer')
@@ -266,6 +268,9 @@ $main.addEventListener('click', function () {
       toggleHide($detailMain)
       fillScorecard($dataNum)
       toggleHide($scorecard)
+      openRound($dataNum)
+      var $roundId = $scorecard.getAttribute('data-number')
+      postScore($roundId)
       $homeButton.remove()
     })
   }
@@ -429,7 +434,6 @@ function renderHome(idNum) {
 function fillScorecard(idNum) {
   var $formPar = document.querySelectorAll('.form-par')
   var $formRender = document.querySelectorAll('.form-render')
-  var $formCalc = document.querySelectorAll('.form-calc')
   var course = courses[idNum - 1]
 
   for (var i = 0; i < $formPar.length; i++) {
@@ -439,19 +443,39 @@ function fillScorecard(idNum) {
   $formRender[1].textContent = par(course)
   $formRender[2].textContent = parRange(course, 1, 9)
   $formRender[3].textContent = parRange(course, 10, 18)
+}
+
+function openRound(idNum) {
+  var round = {}
+  round.startTime = new Date()
+  round.endTime = null
+  round.courseId = courses[idNum].id
+  round.parIndex = courses[idNum].parIndex
+  round.roundId = roundsData.length + 1
+  $scorecard.setAttribute('data-number', round.roundId)
+  round.playerScore = []
+  roundsData.push(round)
+}
+
+function postScore(roundId) {
   $scorecard.addEventListener('change', function () {
-    $formCalc[0].textContent = calcScorecard('.front-nine')
-    $formCalc[1].textContent = calcScorecard('.back-nine')
-    $formCalc[2].textContent = calcScorecard('.player-par')
+    var $scores = document.querySelectorAll('.player-par')
+    var $formCalc = document.querySelectorAll('.form-calc')
+    var round = roundsData[roundId - 1]
+    for (var i = 0; i < $scores.length; i++) {
+      round.playerScore[i] = Number($scores[i].value)
+    }
+    $formCalc[0].textContent = calcScorecard(round.playerScore, 1, 9)
+    $formCalc[1].textContent = calcScorecard(round.playerScore, 10, 18)
+    $formCalc[2].textContent = calcScorecard(round.playerScore, 1, 18)
   })
 }
 
-function calcScorecard(className) {
-  var $scores = document.querySelectorAll(className)
+function calcScorecard(playerScore, begHole, endHole) {
   var scoreTotal = 0
 
-  for (i = 0; i < $scores.length; i++) {
-    scoreTotal += Number($scores[i].value)
+  for (i = begHole - 1; i < endHole; i++) {
+    scoreTotal += playerScore[i]
   }
   return scoreTotal
 }

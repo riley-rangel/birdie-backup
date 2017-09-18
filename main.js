@@ -235,6 +235,8 @@ var courses = [
   }
 ]
 
+var $scorecard = document.querySelector('.scorecard')
+
 var $footer = document.querySelector('.footer')
 document.body.insertBefore(renderWelcome('Find a course to play'), $footer)
 
@@ -255,6 +257,15 @@ $main.addEventListener('click', function () {
       var $dataNum = event.target.getAttribute('data-number')
       resetMain($dataNum)
       toggleHide($main)
+      $homeButton.remove()
+    })
+    var $startButton = document.querySelector('.start-button')
+    $startButton.addEventListener('click', function () {
+      var $dataNum = event.target.getAttribute('data-number')
+      var $detailMain = document.querySelector('#main-' + $dataNum)
+      toggleHide($detailMain)
+      fillScorecard($dataNum)
+      toggleHide($scorecard)
       $homeButton.remove()
     })
   }
@@ -278,6 +289,16 @@ function par(course) {
   var parTotal = 0
 
   for (var i = 0; i < selection.length; i++) {
+    parTotal += selection[i]
+  }
+  return parTotal
+}
+
+function parRange(course, begHole, endHole) {
+  var selection = course.parIndex
+  var parTotal = 0
+
+  for (var i = (begHole - 1); i < endHole; i++) {
     parTotal += selection[i]
   }
   return parTotal
@@ -322,6 +343,8 @@ function renderDetails(courseData) {
   var $addressCard = document.createElement('div')
   var $name = document.createElement('h4')
   var $address = document.createElement('h5')
+  var $address2 = document.createElement('h5')
+  var $start = document.createElement('button')
   var $highlightCard = document.createElement('div')
   var $highlightBanner = document.createElement('div')
   var $highlightTitle1 = document.createElement('p')
@@ -347,8 +370,13 @@ function renderDetails(courseData) {
   $name.setAttribute('class', 'center-text')
   $name.textContent = courseData.name
   $address.setAttribute('class', 'center-text')
-  $address.textContent = courseData.address + ' ' + courseData.city + ', ' +
-    courseData.state + ' ' + courseData.zip
+  $address.textContent = courseData.address
+  $address2.setAttribute('class', 'center-text')
+  $address2.textContent = courseData.city + ', ' + courseData.state + ' ' +
+    courseData.zip
+  $start.setAttribute('class', 'start-button button z-depth-4')
+  $start.setAttribute('data-number', courseData.id)
+  $start.textContent = 'Play'
   $highlightCard.setAttribute('class', 'detail-card z-depth-2')
   $highlightBanner.setAttribute('class', 'highlight-banner')
   $highlightTitle1.setAttribute('class', 'highlight-title')
@@ -357,11 +385,11 @@ function renderDetails(courseData) {
   $highlightTitle2.textContent = 'Established'
   $highlightTitle3.setAttribute('class', 'highlight-title')
   $highlightTitle3.textContent = 'Course Rating'
-  $highlight1.setAttribute('class', 'highlight z-depth-4')
+  $highlight1.setAttribute('class', 'highlight z-depth-2')
   $highlight1.textContent = par(courseData)
-  $highlight2.setAttribute('class', 'highlight z-depth-4')
+  $highlight2.setAttribute('class', 'highlight z-depth-2')
   $highlight2.textContent = courseData.openingYear
-  $highlight3.setAttribute('class', 'highlight z-depth-4')
+  $highlight3.setAttribute('class', 'highlight z-depth-2')
   $highlight3.textContent = courseData.usgaRating
   $descripCard.setAttribute('class', 'detail-card z-depth-2')
   $about.textContent = 'About ' + courseData.name
@@ -373,6 +401,8 @@ function renderDetails(courseData) {
   $div.appendChild($addressCard)
   $addressCard.appendChild($name)
   $addressCard.appendChild($address)
+  $addressCard.appendChild($address2)
+  $addressCard.appendChild($start)
   $div.appendChild($highlightCard)
   $highlightCard.appendChild($highlightBanner)
   $highlightBanner.appendChild($highlightTitle1)
@@ -389,9 +419,39 @@ function renderDetails(courseData) {
 }
 
 function renderHome(idNum) {
-  var $home = document.createElement('div')
-  $home.setAttribute('class', 'home-button z-depth-2')
+  var $home = document.createElement('button')
+  $home.setAttribute('class', 'home-button  button z-depth-4')
   $home.setAttribute('data-number', idNum)
   $home.textContent = 'Home'
   return $home
+}
+
+function fillScorecard(idNum) {
+  var $formPar = document.querySelectorAll('.form-par')
+  var $formRender = document.querySelectorAll('.form-render')
+  var $formCalc = document.querySelectorAll('.form-calc')
+  var course = courses[idNum - 1]
+
+  for (var i = 0; i < $formPar.length; i++) {
+    $formPar[i].textContent = course.parIndex[i]
+  }
+  $formRender[0].textContent = course.name
+  $formRender[1].textContent = par(course)
+  $formRender[2].textContent = parRange(course, 1, 9)
+  $formRender[3].textContent = parRange(course, 10, 18)
+  $scorecard.addEventListener('change', function () {
+    $formCalc[0].textContent = calcScorecard('.front-nine')
+    $formCalc[1].textContent = calcScorecard('.back-nine')
+    $formCalc[2].textContent = calcScorecard('.player-par')
+  })
+}
+
+function calcScorecard(className) {
+  var $scores = document.querySelectorAll(className)
+  var scoreTotal = 0
+
+  for (i = 0; i < $scores.length; i++) {
+    scoreTotal += Number($scores[i].value)
+  }
+  return scoreTotal
 }

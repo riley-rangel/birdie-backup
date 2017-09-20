@@ -423,6 +423,15 @@ function renderRecap(roundData) {
   var $recap = document.createElement('div')
   var $recapCard = document.createElement('div')
   var $recapBanner = document.createElement('h5')
+  var $parCard1 = document.createElement('div')
+  var $parCard2 = document.createElement('div')
+  var $parCard3 = document.createElement('div')
+  var $scoreHeading1 = document.createElement('p')
+  var $scoreHeading2 = document.createElement('p')
+  var $scoreHeading3 = document.createElement('p')
+  var $scoreContent1 = document.createElement('h2')
+  var $scoreContent2 = document.createElement('h2')
+  var $scoreContent3 = document.createElement('h2')
   var $highlightCard = document.createElement('div')
   var $highlightBanner = document.createElement('div')
   var $highlightTitle1 = document.createElement('p')
@@ -439,14 +448,32 @@ function renderRecap(roundData) {
   $recapCard.setAttribute('class', 'detail-card z-depth-2')
   $recapBanner.textContent = 'Well Done! You\'ve completed a round at ' +
     courses[roundData.courseId - 1].name
+  $parCard1.setAttribute('class', 'par-card z-depth-2')
+  $parCard2.setAttribute('class', 'par-card z-depth-2')
+  $parCard3.setAttribute('class', 'par-card z-depth-2')
+  $scoreHeading1.setAttribute('class', 'par-title center-text')
+  $scoreHeading1.textContent = 'Course Par'
+  $scoreHeading2.setAttribute('class', 'par-title center-text')
+  $scoreHeading2.textContent = 'Player Score'
+  $scoreHeading3.setAttribute('class', 'par-title center-text')
+  $scoreHeading3.textContent = 'Net Score'
+  $scoreContent1.setAttribute('class', 'center-text')
+  $scoreContent1.textContent =
+    parRange(courses[roundData.courseId - 1].parIndex, 1, 18)
+  $scoreContent2.setAttribute('class', 'center-text')
+  $scoreContent2.textContent = calcScorecard(roundData.playerScore, 1, 18)
+  $scoreContent3.setAttribute('class', 'center-text')
+  $scoreContent3.textContent =
+    netScore(calcScorecard(roundData.playerScore, 1, 18),
+      parRange(courses[roundData.courseId - 1].parIndex, 1, 18))
   $highlightCard.setAttribute('class', 'detail-card z-depth-2')
   $highlightBanner.setAttribute('class', 'highlight-banner')
   $highlightTitle1.setAttribute('class', 'highlight-title')
-  $highlightTitle1.textContent = 'Player Score'
+  $highlightTitle1.textContent = 'Round Time'
   $highlightTitle2.setAttribute('class', 'highlight-title')
-  $highlightTitle2.textContent = 'Round Time'
+  $highlightTitle2.textContent = 'Handicap'
   $highlightTitle3.setAttribute('class', 'highlight-title')
-  $highlightTitle3.textContent = 'Current Handicap'
+  $highlightTitle3.textContent = 'Handicap +/-'
   $highlight1.setAttribute('class', 'highlight z-depth-2')
   $highlight1.textContent = calcScorecard(roundData.playerScore, 1, 18)
   $highlight2.setAttribute('class', 'highlight z-depth-2')
@@ -454,8 +481,11 @@ function renderRecap(roundData) {
   $highlight3.setAttribute('class', 'highlight z-depth-2')
   $highlight3.textContent = '25'
 
-  $recap.append($recapCard, $highlightCard)
-  $recapCard.append($recapBanner, $table)
+  $recap.append($parCard1, $parCard2, $parCard3, $highlightCard, $recapCard)
+  $parCard1.append($scoreHeading1, $scoreContent1)
+  $parCard2.append($scoreHeading2, $scoreContent2)
+  $parCard3.append($scoreHeading3, $scoreContent3)
+  $recapCard.append($table)
   $highlightCard.append($highlightBanner, $highlight1, $highlight2, $highlight3)
   $highlightBanner.append($highlightTitle1, $highlightTitle2, $highlightTitle3)
 
@@ -476,24 +506,8 @@ function renderRecapTable(roundData) {
     parRange(course.parIndex, 10, 18))
   var $playerBack = renderRecapRow(11, 'Player', roundData.playerScore, 9,
     calcScorecard(roundData.playerScore, 10, 18))
-  var $lastRow = document.createElement('tr')
-  for (var c = 0; c < 11; c++) {
-    var $col = document.createElement('td')
-    if (c === 0) {
-      $col.textContent = 'Total'
-      $lastRow.appendChild($col)
-    }
-    else if (c === 10) {
-      $col.textContent = calcScorecard(roundData.playerScore, 1, 18)
-      $lastRow.appendChild($col)
-    }
-    else {
-      $lastRow.appendChild($col)
-    }
-  }
   $table.appendChild($tbody)
-  $tbody.append($front, $parFront, $playerFront, $back, $parBack, $playerBack,
-    $lastRow)
+  $tbody.append($front, $parFront, $playerFront, $back, $parBack, $playerBack)
   return $table
 }
 
@@ -505,17 +519,23 @@ function renderRecapRow(rowLength, firstCol, dataStart, indexStart, lastCol) {
   $row.appendChild($firstCol)
   for (var i = 0; i < (rowLength - 2); i++) {
     var $col = document.createElement('td')
-    if (isNaN(dataStart)) {
-      $col.textContent = dataStart[indexStart + i]
-      $row.appendChild($col)
+    if (dataStart.length > 1 || Number.isInteger(dataStart)) {
+      if (isNaN(dataStart)) {
+        $col.textContent = dataStart[indexStart + i]
+        $row.appendChild($col)
+      }
+      else {
+        $col.textContent = i + dataStart
+        $row.appendChild($col)
+      }
     }
     else {
-      $col.textContent = i + dataStart
+      $col.textContent = 0
       $row.appendChild($col)
     }
-    $lastCol.textContent = lastCol
-    $row.appendChild($lastCol)
   }
+  $lastCol.textContent = lastCol
+  $row.appendChild($lastCol)
   return $row
 }
 
@@ -529,8 +549,10 @@ function parRange(parIndex, begHole, endHole) {
 
 function calcScorecard(playerScore, begHole, endHole) {
   var scoreTotal = 0
-  for (var i = (begHole - 1); i < endHole; i++) {
-    scoreTotal += playerScore[i]
+  if (playerScore.length > 1) {
+    for (var i = (begHole - 1); i < endHole; i++) {
+      scoreTotal += playerScore[i]
+    }
   }
   return scoreTotal
 }
@@ -565,7 +587,7 @@ function openRound(idNum) {
   round.parIndex = courses[idNum - 1].parIndex
   round.roundId = roundsData.length + 1
   $scorecard.setAttribute('data-number', round.roundId)
-  round.playerScore = [0]
+  round.playerScore = []
   roundsData.push(round)
   return round.roundId
 }
@@ -587,4 +609,15 @@ function postScore(roundId) {
     $formCalc[1].textContent = calcScorecard(round.playerScore, 10, 18)
     $formCalc[2].textContent = calcScorecard(round.playerScore, 1, 18)
   })
+}
+
+function netScore(score, par) {
+  var net = (score - par)
+  if (net > 0) {
+    net = '+' + (score - par)
+    return net
+  }
+  else {
+    return net
+  }
 }

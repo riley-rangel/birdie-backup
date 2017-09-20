@@ -157,6 +157,25 @@ p {
   margin-left: calc((100% - 100px) / 2);
 }
 
+.par-card {
+  float: left;
+  margin-right: 25px;
+  margin-bottom: 20px;
+  width: calc((100% - 50px) / 3);
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.87);
+}
+
+.par-card:nth-of-type(3n) {
+  margin-right: 0;
+}
+
+.par-title {
+  display: block;
+  line-height: 56px;
+}
+
 .button {
   height: 100px;
   width: 100px;

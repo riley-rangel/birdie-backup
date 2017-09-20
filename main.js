@@ -274,26 +274,8 @@ $main.addEventListener('click', function () {
     var dataNum = $targetCard.getAttribute('data-number')
     document.body.appendChild(renderDetails(courses[dataNum - 1]))
     document.body.appendChild(renderHome(dataNum))
-    var $homeButton = document.querySelector('.home-button')
-    $homeButton.addEventListener('click', function () {
-      var $dataNum = event.target.getAttribute('data-number')
-      resetMain($dataNum)
-      $welcome.textContent = 'Find a course to play'
-      toggleHide($main)
-      $homeButton.remove()
-    })
-    var $startButton = document.querySelector('.start-button')
-    $startButton.addEventListener('click', function () {
-      var $dataNum = event.target.getAttribute('data-number')
-      var $detailMain = document.querySelector('#main-' + $dataNum)
-      toggleHide($detailMain)
-      $welcome.textContent = 'Enjoy your round'
-      fillScorecard($dataNum)
-      toggleHide($scorecard)
-      var $roundId = openRound($dataNum)
-      postScore($roundId)
-      toggleHide($homeButton)
-    })
+    homeActivate()
+    startActivate()
   }
 })
 
@@ -306,6 +288,7 @@ $scorecard.addEventListener('submit', function () {
   toggleHide($homeButton)
   $welcome.textContent = 'Round recap'
   document.body.insertBefore(renderRecap(round), $scorecard)
+  resetScorecard()
 })
 
 function renderWelcome(string) {
@@ -429,12 +412,48 @@ function renderDetails(courseData) {
   return $div
 }
 
+function startActivate() {
+  var $startButton = document.querySelector('.start-button')
+  var $homeButton = document.querySelector('.home-button')
+  $startButton.addEventListener('click', function () {
+    var $dataNum = event.target.getAttribute('data-number')
+    var $detailMain = document.querySelector('#main-' + $dataNum)
+    toggleHide($detailMain)
+    toggleHide($homeButton)
+    homePostRecap()
+    $welcome.textContent = 'Enjoy your round'
+    fillScorecard($dataNum)
+    toggleHide($scorecard)
+    var $roundId = openRound($dataNum)
+    postScore($roundId)
+  })
+}
+
 function renderHome(idNum) {
   var $home = document.createElement('button')
   $home.setAttribute('class', 'home-button  button z-depth-4')
   $home.setAttribute('data-number', idNum)
   $home.textContent = 'Home'
   return $home
+}
+
+function homeActivate() {
+  var $homeButton = document.querySelector('.home-button')
+  $homeButton.addEventListener('click', function () {
+    var $dataNum = event.target.getAttribute('data-number')
+    resetMain($dataNum)
+    toggleHide($main)
+    $welcome.textContent = 'Find a course to play'
+    $homeButton.remove()
+  })
+}
+
+function homePostRecap() {
+  var $homeButton = document.querySelector('.home-button')
+  $homeButton.addEventListener('click', function () {
+    var $recap = document.querySelector('#recap')
+    $recap.remove()
+  })
 }
 
 function renderRecap(roundData) {
@@ -604,6 +623,13 @@ function fillScorecard(idNum) {
   $formRender[1].textContent = parRange(course.parIndex, 1, 18)
   $formRender[2].textContent = parRange(course.parIndex, 1, 9)
   $formRender[3].textContent = parRange(course.parIndex, 10, 18)
+}
+
+function resetScorecard() {
+  var $inputs = $scorecard.querySelectorAll('input')
+  for (var i = 0; i < $inputs.length; i++) {
+    $inputs[i].value = ''
+  }
 }
 
 function openRound(idNum) {

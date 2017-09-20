@@ -243,6 +243,39 @@ p {
   border-bottom-right-radius: 3px;
 }
 
+.recap-table {
+  font-size: 20px;
+  border-top: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.recap-row:first-child > td {
+  margin-top: 20px;
+}
+
+.recap-row:nth-child(3n + 1) {
+  font-weight: bold;
+}
+
+.recap-row:nth-child(3n) {
+  border-radius: 3px;
+  background-color: #eee;
+}
+
+tr.recap-row > td {
+  text-align: center;
+}
+
+tr.recap-row > td:first-child {
+  font-weight: bold;
+  text-align: left;
+}
+
+tr.recap-row > td:last-child {
+  font-weight: bold;
+  text-align: right;
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;

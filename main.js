@@ -438,6 +438,7 @@ function renderHome(idNum) {
 }
 
 function renderRecap(roundData) {
+  var course = courses[roundData.courseId - 1]
   var $recap = document.createElement('div')
   var $recapCard = document.createElement('div')
   var $recapBanner = document.createElement('h5')
@@ -464,7 +465,7 @@ function renderRecap(roundData) {
   $recap.setAttribute('id', 'recap')
   $recapCard.setAttribute('class', 'detail-card z-depth-2')
   $recapBanner.textContent = 'Well Done! You\'ve completed a round at ' +
-    courses[roundData.courseId - 1].name
+    course.name
   $parCard1.setAttribute('class', 'par-card z-depth-2')
   $parCard2.setAttribute('class', 'par-card z-depth-2')
   $parCard3.setAttribute('class', 'par-card z-depth-2')
@@ -476,13 +477,13 @@ function renderRecap(roundData) {
   $scoreHeading3.textContent = 'Net Score'
   $scoreContent1.setAttribute('class', 'center-text')
   $scoreContent1.textContent =
-    parRange(courses[roundData.courseId - 1].parIndex, 1, 18)
+    parRange(course.parIndex, 1, 18)
   $scoreContent2.setAttribute('class', 'center-text')
   $scoreContent2.textContent = calcScorecard(roundData.playerScore, 1, 18)
   $scoreContent3.setAttribute('class', 'center-text')
   $scoreContent3.textContent =
     netScore(calcScorecard(roundData.playerScore, 1, 18),
-      parRange(courses[roundData.courseId - 1].parIndex, 1, 18))
+      parRange(course.parIndex, 1, 18))
   $highlightCard.setAttribute('class', 'detail-card z-depth-2')
   $highlightBanner.setAttribute('class', 'highlight-banner')
   $highlightTitle1.setAttribute('class', 'highlight-title')
@@ -523,6 +524,15 @@ function renderRecapTable(roundData) {
     parRange(course.parIndex, 10, 18))
   var $playerBack = renderRecapRow(11, 'Player', roundData.playerScore, 9,
     calcScorecard(roundData.playerScore, 10, 18))
+
+  $table.setAttribute('class', 'recap-table')
+  $front.setAttribute('class', 'recap-row')
+  $parFront.setAttribute('class', 'recap-row')
+  $playerFront.setAttribute('class', 'recap-row')
+  $back.setAttribute('class', 'recap-row')
+  $parBack.setAttribute('class', 'recap-row')
+  $playerBack.setAttribute('class', 'recap-row')
+
   $table.appendChild($tbody)
   $tbody.append($front, $parFront, $playerFront, $back, $parBack, $playerBack)
   return $table

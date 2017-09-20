@@ -239,25 +239,28 @@ var roundsData = []
 
 var $scorecard = document.querySelector('.scorecard')
 
-var $footer = document.querySelector('.footer')
-document.body.insertBefore(renderWelcome('Find a course to play'), $footer)
+document.body.insertBefore(renderWelcome('Find a course to play'), $scorecard)
+document.body.insertBefore(renderMain(), $scorecard)
 
 var $main = document.querySelector('#main')
+var $welcome = document.querySelector('#welcome')
 for (var i = 0; i < courses.length; i++) {
-  $main.append(renderCourseCard(courses[i]))
+  $main.appendChild(renderCourseCard(courses[i]))
 }
 
 $main.addEventListener('click', function () {
   var $targetCard = event.target.closest('.course-card')
   if ($targetCard !== null) {
     toggleHide($main)
+    $welcome.textContent = 'Course details'
     var dataNum = $targetCard.getAttribute('data-number')
-    document.body.insertBefore(renderDetails(courses[dataNum - 1]), $footer)
+    document.body.appendChild(renderDetails(courses[dataNum - 1]))
     document.body.appendChild(renderHome(dataNum))
     var $homeButton = document.querySelector('.home-button')
     $homeButton.addEventListener('click', function () {
       var $dataNum = event.target.getAttribute('data-number')
       resetMain($dataNum)
+      $welcome.textContent = 'Find a course to play'
       toggleHide($main)
       $homeButton.remove()
     })
@@ -266,14 +269,23 @@ $main.addEventListener('click', function () {
       var $dataNum = event.target.getAttribute('data-number')
       var $detailMain = document.querySelector('#main-' + $dataNum)
       toggleHide($detailMain)
+      $welcome.textContent = 'Enjoy your round'
       fillScorecard($dataNum)
       toggleHide($scorecard)
-      openRound($dataNum)
-      var $roundId = $scorecard.getAttribute('data-number')
+      var $roundId = openRound($dataNum)
       postScore($roundId)
-      $homeButton.remove()
+      toggleHide($homeButton)
     })
   }
+})
+
+$scorecard.addEventListener('submit', function () {
+  event.preventDefault()
+  var roundNum = $scorecard.getAttribute('data-number')
+  var round = endRound(roundNum)
+  toggleHide($scorecard)
+  $welcome.textContent = 'Round recap'
+  document.body.insertBefore(renderRecap(round), $scorecard)
 })
 
 function renderWelcome(string) {
@@ -281,32 +293,19 @@ function renderWelcome(string) {
   var $p = document.createElement('p')
 
   $div.setAttribute('class', 'container')
-  $div.setAttribute('id', 'main')
   $p.setAttribute('class', 'welcome-banner')
+  $p.setAttribute('id', 'welcome')
   $p.textContent = string
   $div.appendChild($p)
 
   return $div
 }
 
-function par(course) {
-  var selection = course.parIndex
-  var parTotal = 0
-
-  for (var i = 0; i < selection.length; i++) {
-    parTotal += selection[i]
-  }
-  return parTotal
-}
-
-function parRange(course, begHole, endHole) {
-  var selection = course.parIndex
-  var parTotal = 0
-
-  for (var i = (begHole - 1); i < endHole; i++) {
-    parTotal += selection[i]
-  }
-  return parTotal
+function renderMain() {
+  var $div = document.createElement('div')
+  $div.setAttribute('class', 'container')
+  $div.setAttribute('id', 'main')
+  return $div
 }
 
 function renderCourseCard(courseData) {
@@ -314,7 +313,7 @@ function renderCourseCard(courseData) {
   var $img = document.createElement('img')
   var $info = document.createElement('div')
   var $infoText = document.createElement('p')
-  var parSum = par(courseData)
+  var parSum = parRange(courseData.parIndex, 1, 18)
 
   $card.setAttribute('class', 'course-card z-depth-2 hover')
   $card.setAttribute('data-number', courseData.id)
@@ -331,18 +330,8 @@ function renderCourseCard(courseData) {
   return $card
 }
 
-function toggleHide(element) {
-  element.classList.toggle('hidden')
-}
-
-function resetMain(idNum) {
-  var $pick = document.querySelector('#main-' + idNum)
-  $pick.remove()
-}
-
 function renderDetails(courseData) {
   var $div = document.createElement('div')
-  var $welcome = document.createElement('p')
   var $imgCard = document.createElement('div')
   var $img = document.createElement('img')
   var $addressCard = document.createElement('div')
@@ -364,8 +353,6 @@ function renderDetails(courseData) {
 
   $div.setAttribute('id', 'main-' + courseData.id)
   $div.setAttribute('class', 'container')
-  $welcome.setAttribute('class', 'welcome-banner')
-  $welcome.textContent = 'Course details'
   $imgCard.setAttribute('class', 'course-card z-depth-2')
   $img.setAttribute('class', 'card-image')
   $img.setAttribute('src', courseData.imgUrl)
@@ -391,7 +378,7 @@ function renderDetails(courseData) {
   $highlightTitle3.setAttribute('class', 'highlight-title')
   $highlightTitle3.textContent = 'Course Rating'
   $highlight1.setAttribute('class', 'highlight z-depth-2')
-  $highlight1.textContent = par(courseData)
+  $highlight1.textContent = parRange(courseData.parIndex, 1, 18)
   $highlight2.setAttribute('class', 'highlight z-depth-2')
   $highlight2.textContent = courseData.openingYear
   $highlight3.setAttribute('class', 'highlight z-depth-2')
@@ -400,7 +387,6 @@ function renderDetails(courseData) {
   $about.textContent = 'About ' + courseData.name
   $descripText.textContent = courseData.description
 
-  $div.appendChild($welcome)
   $div.appendChild($imgCard)
   $imgCard.appendChild($img)
   $div.appendChild($addressCard)
@@ -431,30 +417,124 @@ function renderHome(idNum) {
   return $home
 }
 
+function renderRecap(roundData) {
+  var $recap = document.createElement('div')
+  var $recapCard = document.createElement('div')
+  var $recapBanner = document.createElement('h5')
+  var $highlightCard = document.createElement('div')
+  var $highlightBanner = document.createElement('div')
+  var $highlightTitle1 = document.createElement('p')
+  var $highlightTitle2 = document.createElement('p')
+  var $highlightTitle3 = document.createElement('p')
+  var $highlight1 = document.createElement('div')
+  var $highlight2 = document.createElement('div')
+  var $highlight3 = document.createElement('div')
+  var $table = renderTable(7, 11)
+  var $tableData = $table.querySelectorAll('td')
+  var $scorecardData = $scorecard.querySelectorAll('td')
+  var roundTime = 'time'
+
+  for (var i = 0; i < $tableData.length; i = i + 11) {
+    $tableData[i].textContent = $scorecardData[i].textContent
+    $tableData[i].setAttribute('class', 'form-left')
+  }
+
+  $recap.setAttribute('class', 'container')
+  $recapCard.setAttribute('class', 'detail-card z-depth-2')
+  $recapBanner.textContent = 'Well Done! You\'ve completed a round at ' +
+    courses[roundData.courseId - 1].name
+  $highlightCard.setAttribute('class', 'detail-card z-depth-2')
+  $highlightBanner.setAttribute('class', 'highlight-banner')
+  $highlightTitle1.setAttribute('class', 'highlight-title')
+  $highlightTitle1.textContent = 'Player Score'
+  $highlightTitle2.setAttribute('class', 'highlight-title')
+  $highlightTitle2.textContent = 'Round Time'
+  $highlightTitle3.setAttribute('class', 'highlight-title')
+  $highlightTitle3.textContent = 'Current Handicap'
+  $highlight1.setAttribute('class', 'highlight z-depth-2')
+  $highlight1.textContent = calcScorecard(roundData.playerScore, 1, 18)
+  $highlight2.setAttribute('class', 'highlight z-depth-2')
+  $highlight2.textContent = roundTime
+  $highlight3.setAttribute('class', 'highlight z-depth-2')
+  $highlight3.textContent = '25'
+
+  $recap.append($recapCard, $highlightCard)
+  $recapCard.append($recapBanner, $table)
+  $highlightCard.append($highlightBanner, $highlight1, $highlight2, $highlight3)
+  $highlightBanner.append($highlightTitle1, $highlightTitle2, $highlightTitle3)
+
+  return $recap
+}
+
+function renderTable(rows, columns) {
+  var $table = document.createElement('table')
+  var $tbody = document.createElement('tbody')
+  for (var r = 0; r < rows; r++) {
+    var $row = document.createElement('tr')
+    for (var c = 0; c < columns; c++) {
+      var $column = document.createElement('td')
+      $row.appendChild($column)
+    }
+    $tbody.appendChild($row)
+  }
+  $table.appendChild($tbody)
+  return $table
+}
+
+function parRange(parIndex, begHole, endHole) {
+  var parTotal = 0
+  for (var i = (begHole - 1); i < endHole; i++) {
+    parTotal += parIndex[i]
+  }
+  return parTotal
+}
+
+function calcScorecard(playerScore, begHole, endHole) {
+  var scoreTotal = 0
+  for (var i = (begHole - 1); i < endHole; i++) {
+    scoreTotal += playerScore[i]
+  }
+  return scoreTotal
+}
+
+function toggleHide(element) {
+  element.classList.toggle('hidden')
+}
+
+function resetMain(idNum) {
+  var $pick = document.querySelector('#main-' + idNum)
+  $pick.remove()
+}
+
 function fillScorecard(idNum) {
   var $formPar = document.querySelectorAll('.form-par')
   var $formRender = document.querySelectorAll('.form-render')
   var course = courses[idNum - 1]
-
   for (var i = 0; i < $formPar.length; i++) {
     $formPar[i].textContent = course.parIndex[i]
   }
   $formRender[0].textContent = course.name
-  $formRender[1].textContent = par(course)
-  $formRender[2].textContent = parRange(course, 1, 9)
-  $formRender[3].textContent = parRange(course, 10, 18)
+  $formRender[1].textContent = parRange(course.parIndex, 1, 18)
+  $formRender[2].textContent = parRange(course.parIndex, 1, 9)
+  $formRender[3].textContent = parRange(course.parIndex, 10, 18)
 }
 
 function openRound(idNum) {
   var round = {}
   round.startTime = new Date()
   round.endTime = null
-  round.courseId = courses[idNum].id
-  round.parIndex = courses[idNum].parIndex
+  round.courseId = courses[idNum - 1].id
+  round.parIndex = courses[idNum - 1].parIndex
   round.roundId = roundsData.length + 1
   $scorecard.setAttribute('data-number', round.roundId)
   round.playerScore = []
   roundsData.push(round)
+  return round.roundId
+}
+
+function endRound(roundId) {
+  roundsData[roundId - 1].endTime = new Date()
+  return roundsData[roundId - 1]
 }
 
 function postScore(roundId) {
@@ -469,13 +549,4 @@ function postScore(roundId) {
     $formCalc[1].textContent = calcScorecard(round.playerScore, 10, 18)
     $formCalc[2].textContent = calcScorecard(round.playerScore, 1, 18)
   })
-}
-
-function calcScorecard(playerScore, begHole, endHole) {
-  var scoreTotal = 0
-
-  for (i = begHole - 1; i < endHole; i++) {
-    scoreTotal += playerScore[i]
-  }
-  return scoreTotal
 }

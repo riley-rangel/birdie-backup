@@ -283,7 +283,9 @@ $scorecard.addEventListener('submit', function () {
   event.preventDefault()
   var roundNum = $scorecard.getAttribute('data-number')
   var round = endRound(roundNum)
+  var $homeButton = document.querySelector('.home-button')
   toggleHide($scorecard)
+  toggleHide($homeButton)
   $welcome.textContent = 'Round recap'
   document.body.insertBefore(renderRecap(round), $scorecard)
 })
@@ -429,17 +431,11 @@ function renderRecap(roundData) {
   var $highlight1 = document.createElement('div')
   var $highlight2 = document.createElement('div')
   var $highlight3 = document.createElement('div')
-  var $table = renderTable(7, 11)
-  var $tableData = $table.querySelectorAll('td')
-  var $scorecardData = $scorecard.querySelectorAll('td')
+  var $table = renderRecapTable(roundData)
   var roundTime = 'time'
 
-  for (var i = 0; i < $tableData.length; i = i + 11) {
-    $tableData[i].textContent = $scorecardData[i].textContent
-    $tableData[i].setAttribute('class', 'form-left')
-  }
-
   $recap.setAttribute('class', 'container')
+  $recap.setAttribute('id', 'recap')
   $recapCard.setAttribute('class', 'detail-card z-depth-2')
   $recapBanner.textContent = 'Well Done! You\'ve completed a round at ' +
     courses[roundData.courseId - 1].name
@@ -466,19 +462,61 @@ function renderRecap(roundData) {
   return $recap
 }
 
-function renderTable(rows, columns) {
+function renderRecapTable(roundData) {
+  var course = courses[roundData.courseId - 1]
   var $table = document.createElement('table')
   var $tbody = document.createElement('tbody')
-  for (var r = 0; r < rows; r++) {
-    var $row = document.createElement('tr')
-    for (var c = 0; c < columns; c++) {
-      var $column = document.createElement('td')
-      $row.appendChild($column)
+  var $front = renderRecapRow(11, 'Front', 1, null, 'Total')
+  var $parFront = renderRecapRow(11, 'Par', course.parIndex, 0,
+    parRange(course.parIndex, 1, 9))
+  var $playerFront = renderRecapRow(11, 'Player', roundData.playerScore, 0,
+    calcScorecard(roundData.playerScore, 1, 9))
+  var $back = renderRecapRow(11, 'Back', 10, null, 'Total')
+  var $parBack = renderRecapRow(11, 'Par', course.parIndex, 9,
+    parRange(course.parIndex, 10, 18))
+  var $playerBack = renderRecapRow(11, 'Player', roundData.playerScore, 9,
+    calcScorecard(roundData.playerScore, 10, 18))
+  var $lastRow = document.createElement('tr')
+  for (var c = 0; c < 11; c++) {
+    var $col = document.createElement('td')
+    if (c === 0) {
+      $col.textContent = 'Total'
+      $lastRow.appendChild($col)
     }
-    $tbody.appendChild($row)
+    else if (c === 10) {
+      $col.textContent = calcScorecard(roundData.playerScore, 1, 18)
+      $lastRow.appendChild($col)
+    }
+    else {
+      $lastRow.appendChild($col)
+    }
   }
   $table.appendChild($tbody)
+  $tbody.append($front, $parFront, $playerFront, $back, $parBack, $playerBack,
+    $lastRow)
   return $table
+}
+
+function renderRecapRow(rowLength, firstCol, dataStart, indexStart, lastCol) {
+  var $row = document.createElement('tr')
+  var $firstCol = document.createElement('td')
+  var $lastCol = document.createElement('td')
+  $firstCol.textContent = firstCol
+  $row.appendChild($firstCol)
+  for (var i = 0; i < (rowLength - 2); i++) {
+    var $col = document.createElement('td')
+    if (isNaN(dataStart)) {
+      $col.textContent = dataStart[indexStart + i]
+      $row.appendChild($col)
+    }
+    else {
+      $col.textContent = i + dataStart
+      $row.appendChild($col)
+    }
+    $lastCol.textContent = lastCol
+    $row.appendChild($lastCol)
+  }
+  return $row
 }
 
 function parRange(parIndex, begHole, endHole) {
@@ -527,7 +565,7 @@ function openRound(idNum) {
   round.parIndex = courses[idNum - 1].parIndex
   round.roundId = roundsData.length + 1
   $scorecard.setAttribute('data-number', round.roundId)
-  round.playerScore = []
+  round.playerScore = [0]
   roundsData.push(round)
   return round.roundId
 }

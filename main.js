@@ -317,7 +317,6 @@ function renderCourseCard(courseData) {
   var $img = document.createElement('img')
   var $info = document.createElement('div')
   var $infoText = document.createElement('p')
-  var parSum = parRange(courseData.parIndex, 1, 18)
 
   $div.setAttribute('class', 'col s12 m6 l6 xl4')
   $card.setAttribute('class', 'course-card z-depth-2')
@@ -326,7 +325,7 @@ function renderCourseCard(courseData) {
   $img.setAttribute('src', courseData.imgUrl)
   $img.setAttribute('alt', '')
   $info.setAttribute('class', 'card-info z-depth-1')
-  $infoText.textContent = courseData.name + ' / ' + parSum
+  $infoText.textContent = courseData.name
 
   $div.appendChild($card)
   $card.appendChild($img)

@@ -17,7 +17,6 @@ p {
   margin: auto;
   height: 56px;
   width: 100%;
-  box-sizing: border-box;
   background-color: #4caf50;
   z-index: 100;
 }
@@ -78,11 +77,14 @@ p {
 .card-info {
   position: absolute;
   z-index: 2;
-  padding: 5px 10px;
+  padding: 0 10px;
   height: 56px;
   width: 100%;
   box-sizing: border-box;
   background: rgba(245, 245, 245, 0.8);
+  line-height: 56px;
+  vertical-align: center;
+  overflow: hidden;
 }
 
 .detail-card {

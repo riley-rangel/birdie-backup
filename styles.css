@@ -133,12 +133,6 @@ p {
   text-align: center;
 }
 
-.footer {
-  display: none;
-  bottom: 0;
-  box-shadow: 0 -4px 5px 0 rgba(0, 0, 0, 0.14), 0 -1px 10px 0 rgba(0, 0, 0, 0.12), 0 -2px 4px -1px rgba(0, 0, 0, 0.3);
-}
-
 .hidden {
   display: none;
 }
@@ -163,6 +157,25 @@ p {
   margin-left: calc((100% - 100px) / 2);
 }
 
+.par-card {
+  float: left;
+  margin-right: 25px;
+  margin-bottom: 20px;
+  width: calc((100% - 50px) / 3);
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.87);
+}
+
+.par-card:nth-of-type(3n) {
+  margin-right: 0;
+}
+
+.par-title {
+  display: block;
+  line-height: 56px;
+}
+
 .button {
   height: 100px;
   width: 100px;
@@ -176,7 +189,6 @@ p {
 
 .scorecard {
   position: relative;
-  top: 76px;
   padding: 40px;
   box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.87);
@@ -229,6 +241,39 @@ p {
 .player-score {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
+}
+
+.recap-table {
+  font-size: 20px;
+  border-top: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.recap-row:first-child > td {
+  margin-top: 20px;
+}
+
+.recap-row:nth-child(3n + 1) {
+  font-weight: bold;
+}
+
+.recap-row:nth-child(3n) {
+  border-radius: 3px;
+  background-color: #eee;
+}
+
+tr.recap-row > td {
+  text-align: center;
+}
+
+tr.recap-row > td:first-child {
+  font-weight: bold;
+  text-align: left;
+}
+
+tr.recap-row > td:last-child {
+  font-weight: bold;
+  text-align: right;
 }
 
 input[type=number]::-webkit-inner-spin-button,

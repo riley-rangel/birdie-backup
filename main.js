@@ -295,7 +295,7 @@ function renderWelcome(string) {
   var $div = document.createElement('div')
   var $p = document.createElement('p')
 
-  $div.setAttribute('class', 'container')
+  $div.setAttribute('class', 'container col s12')
   $p.setAttribute('class', 'welcome-banner')
   $p.setAttribute('id', 'welcome')
   $p.textContent = string
@@ -306,19 +306,21 @@ function renderWelcome(string) {
 
 function renderMain() {
   var $div = document.createElement('div')
-  $div.setAttribute('class', 'container')
+  $div.setAttribute('class', 'container row')
   $div.setAttribute('id', 'main')
   return $div
 }
 
 function renderCourseCard(courseData) {
+  var $div = document.createElement('div')
   var $card = document.createElement('div')
   var $img = document.createElement('img')
   var $info = document.createElement('div')
   var $infoText = document.createElement('p')
   var parSum = parRange(courseData.parIndex, 1, 18)
 
-  $card.setAttribute('class', 'course-card z-depth-2 hover')
+  $div.setAttribute('class', 'col s12 m6 l6 xl4')
+  $card.setAttribute('class', 'course-card z-depth-2')
   $card.setAttribute('data-number', courseData.id)
   $img.setAttribute('class', 'card-image')
   $img.setAttribute('src', courseData.imgUrl)
@@ -326,22 +328,26 @@ function renderCourseCard(courseData) {
   $info.setAttribute('class', 'card-info z-depth-1')
   $infoText.textContent = courseData.name + ' / ' + parSum
 
+  $div.appendChild($card)
   $card.appendChild($img)
   $card.appendChild($info)
   $info.appendChild($infoText)
 
-  return $card
+  return $div
 }
 
 function renderDetails(courseData) {
   var $div = document.createElement('div')
+  var $imgDiv = document.createElement('div')
   var $imgCard = document.createElement('div')
   var $img = document.createElement('img')
+  var $addressDiv = document.createElement('div')
   var $addressCard = document.createElement('div')
   var $name = document.createElement('h4')
   var $address = document.createElement('h5')
   var $address2 = document.createElement('h5')
   var $start = document.createElement('button')
+  var $highlightDiv = document.createElement('div')
   var $highlightCard = document.createElement('div')
   var $highlightBanner = document.createElement('div')
   var $highlightTitle1 = document.createElement('p')
@@ -350,18 +356,21 @@ function renderDetails(courseData) {
   var $highlight1 = document.createElement('div')
   var $highlight2 = document.createElement('div')
   var $highlight3 = document.createElement('div')
+  var $descripDiv = document.createElement('div')
   var $descripCard = document.createElement('div')
   var $about = document.createElement('h5')
   var $descripText = document.createElement('p')
 
   $div.setAttribute('id', 'main-' + courseData.id)
-  $div.setAttribute('class', 'container')
+  $div.setAttribute('class', 'container row')
+  $imgDiv.setAttribute('class', 'col s12 m6 l6 xl4')
   $imgCard.setAttribute('class', 'course-card z-depth-2')
   $img.setAttribute('class', 'card-image')
   $img.setAttribute('src', courseData.imgUrl)
   $img.setAttribute('alt', '')
   $img.setAttribute('style', 'cursor: default')
-  $addressCard.setAttribute('class', 'address-card z-depth-2')
+  $addressDiv.setAttribute('class', 'col s12 m6 l6 xl8')
+  $addressCard.setAttribute('class', 'address-card z-depth-2 col s12')
   $name.setAttribute('class', 'center-text')
   $name.textContent = courseData.name
   $address.setAttribute('class', 'center-text')
@@ -372,6 +381,7 @@ function renderDetails(courseData) {
   $start.setAttribute('class', 'start-button button z-depth-4')
   $start.setAttribute('data-number', courseData.id)
   $start.textContent = 'Play'
+  $highlightDiv.setAttribute('class', 'col s12')
   $highlightCard.setAttribute('class', 'detail-card z-depth-2')
   $highlightBanner.setAttribute('class', 'highlight-banner')
   $highlightTitle1.setAttribute('class', 'highlight-title')
@@ -386,28 +396,22 @@ function renderDetails(courseData) {
   $highlight2.textContent = courseData.openingYear
   $highlight3.setAttribute('class', 'highlight z-depth-2')
   $highlight3.textContent = courseData.usgaRating
+  $descripDiv.setAttribute('class', 'col s12')
   $descripCard.setAttribute('class', 'detail-card z-depth-2')
   $about.textContent = 'About ' + courseData.name
   $descripText.textContent = courseData.description
 
-  $div.appendChild($imgCard)
+  $div.append($imgDiv, $addressDiv, $highlightDiv, $descripDiv)
+  $imgDiv.appendChild($imgCard)
   $imgCard.appendChild($img)
-  $div.appendChild($addressCard)
-  $addressCard.appendChild($name)
-  $addressCard.appendChild($address)
-  $addressCard.appendChild($address2)
-  $addressCard.appendChild($start)
-  $div.appendChild($highlightCard)
+  $addressDiv.appendChild($addressCard)
+  $addressCard.append($name, $address, $address2, $start)
+  $highlightDiv.appendChild($highlightCard)
   $highlightCard.appendChild($highlightBanner)
-  $highlightBanner.appendChild($highlightTitle1)
-  $highlightBanner.appendChild($highlightTitle2)
-  $highlightBanner.appendChild($highlightTitle3)
-  $highlightCard.appendChild($highlight1)
-  $highlightCard.appendChild($highlight2)
-  $highlightCard.appendChild($highlight3)
-  $div.appendChild($descripCard)
-  $descripCard.appendChild($about)
-  $descripCard.appendChild($descripText)
+  $highlightBanner.append($highlightTitle1, $highlightTitle2, $highlightTitle3)
+  $highlightCard.append($highlight1, $highlight2, $highlight3)
+  $descripDiv.appendChild($descripCard)
+  $descripCard.append($about, $descripText)
 
   return $div
 }
@@ -459,8 +463,12 @@ function homePostRecap() {
 function renderRecap(roundData) {
   var course = courses[roundData.courseId - 1]
   var $recap = document.createElement('div')
+  var $recapDiv = document.createElement('div')
   var $recapCard = document.createElement('div')
   var $recapBanner = document.createElement('h5')
+  var $parDiv1 = document.createElement('div')
+  var $parDiv2 = document.createElement('div')
+  var $parDiv3 = document.createElement('div')
   var $parCard1 = document.createElement('div')
   var $parCard2 = document.createElement('div')
   var $parCard3 = document.createElement('div')
@@ -470,6 +478,7 @@ function renderRecap(roundData) {
   var $scoreContent1 = document.createElement('h2')
   var $scoreContent2 = document.createElement('h2')
   var $scoreContent3 = document.createElement('h2')
+  var $highlightDiv = document.createElement('div')
   var $highlightCard = document.createElement('div')
   var $highlightBanner = document.createElement('div')
   var $highlightTitle1 = document.createElement('p')
@@ -480,11 +489,15 @@ function renderRecap(roundData) {
   var $highlight3 = document.createElement('div')
   var $table = renderRecapTable(roundData)
 
-  $recap.setAttribute('class', 'container')
+  $recap.setAttribute('class', 'container row')
   $recap.setAttribute('id', 'recap')
+  $recapDiv.setAttribute('class', 'col s12')
   $recapCard.setAttribute('class', 'detail-card z-depth-2')
   $recapBanner.textContent = 'Well Done! You\'ve completed a round at ' +
     course.name
+  $parDiv1.setAttribute('class', 'col s4')
+  $parDiv2.setAttribute('class', 'col s4')
+  $parDiv3.setAttribute('class', 'col s4')
   $parCard1.setAttribute('class', 'par-card z-depth-2')
   $parCard2.setAttribute('class', 'par-card z-depth-2')
   $parCard3.setAttribute('class', 'par-card z-depth-2')
@@ -503,6 +516,7 @@ function renderRecap(roundData) {
   $scoreContent3.textContent =
     netScore(calcScorecard(roundData.playerScore, 1, 18),
       parRange(course.parIndex, 1, 18))
+  $highlightDiv.setAttribute('class', 'col s12')
   $highlightCard.setAttribute('class', 'detail-card z-depth-2')
   $highlightBanner.setAttribute('class', 'highlight-banner')
   $highlightTitle1.setAttribute('class', 'highlight-title')
@@ -518,11 +532,16 @@ function renderRecap(roundData) {
   $highlight3.setAttribute('class', 'highlight z-depth-2')
   $highlight3.textContent = bestHole(roundData)
 
-  $recap.append($parCard1, $parCard2, $parCard3, $highlightCard, $recapCard)
+  $recap.append($parDiv1, $parDiv2, $parDiv3, $highlightDiv, $recapDiv)
+  $parDiv1.appendChild($parCard1)
+  $parDiv2.appendChild($parCard2)
+  $parDiv3.appendChild($parCard3)
   $parCard1.append($scoreHeading1, $scoreContent1)
   $parCard2.append($scoreHeading2, $scoreContent2)
   $parCard3.append($scoreHeading3, $scoreContent3)
+  $recapDiv.appendChild($recapCard)
   $recapCard.append($table)
+  $highlightDiv.appendChild($highlightCard)
   $highlightCard.append($highlightBanner, $highlight1, $highlight2, $highlight3)
   $highlightBanner.append($highlightTitle1, $highlightTitle2, $highlightTitle3)
 

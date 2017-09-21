@@ -11,19 +11,15 @@ p {
   font-size: 20px;
 }
 
-.header,
-.footer {
+.header {
   position: fixed;
+  top: 0;
   margin: auto;
   height: 56px;
   width: 100%;
   box-sizing: border-box;
   background-color: #4caf50;
   z-index: 100;
-}
-
-.header {
-  top: 0;
 }
 
 .logo {
@@ -49,30 +45,23 @@ p {
   margin-top: 56px;
   margin-bottom: 0;
   height: 134px;
-  width: 100%;
   line-height: 134px;
   vertical-align: center;
   font-size: 36px;
 }
 
 .address-card {
-  float: right;
   height: 300px;
-  width: calc(100% - 425px);
   margin-bottom: 20px;
   border-radius: 3px;
-  box-sizing: border-box;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.87);
 }
 
 .course-card {
   position: relative;
-  margin-right: 25px;
-  margin-bottom: 20px;
   height: 300px;
-  width: 400px;
-  display: inline-block;
+  margin-bottom: 20px;
   border-radius: 3px;
   box-sizing: border-box;
   overflow: hidden;
@@ -81,7 +70,8 @@ p {
 
 .card-image {
   float: left;
-  height: inherit;
+  height: 100%;
+  width: 100%;
   z-index: 1;
 }
 
@@ -100,10 +90,9 @@ p {
   padding: 1.5rem 2rem 3rem;
   height: auto;
   width: 100%;
-  display: inline-block;
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.8);
-  box-sizing: border-box;
+  overflow: auto;
 }
 
 .highlight-banner {
@@ -158,11 +147,7 @@ p {
 }
 
 .par-card {
-  float: left;
-  margin-right: 25px;
   margin-bottom: 20px;
-  width: calc((100% - 50px) / 3);
-  box-sizing: border-box;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.87);
 }
@@ -172,7 +157,6 @@ p {
 }
 
 .par-title {
-  display: block;
   line-height: 56px;
 }
 
@@ -190,9 +174,9 @@ p {
 .scorecard {
   position: relative;
   padding: 40px;
-  box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.87);
   border-radius: 3px;
+  box-sizing: border-box;
   font-size: 1.2rem;
   overflow: auto;
 }
@@ -244,7 +228,7 @@ p {
 }
 
 .recap-table {
-  font-size: 20px;
+  font-size: 1.2rem;
   border-top: 1px solid #d0d0d0;
   border-bottom: 1px solid #d0d0d0;
 }

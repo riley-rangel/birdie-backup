@@ -3,27 +3,30 @@
   padding: 0;
 }
 
+html {
+  font-family: 'Open Sans', 'Roboto', sans-serif !important;
+}
+
 body {
   background-color: #f5f5f5;
+}
+
+h4 {
+  font-family: 'Cabin', 'Roboto', sans-serif;
 }
 
 p {
   font-size: 20px;
 }
 
-.header,
-.footer {
+.header {
   position: fixed;
+  top: 0;
   margin: auto;
   height: 56px;
   width: 100%;
-  box-sizing: border-box;
   background-color: #4caf50;
   z-index: 100;
-}
-
-.header {
-  top: 0;
 }
 
 .logo {
@@ -41,6 +44,7 @@ p {
   display: inline-block;
   line-height: 56px;
   vertical-align: center;
+  font-family: 'Cabin', 'Roboto', sans-serif;
   font-size: 24px;
   color: rgba(255, 255, 255, 0.87);
 }
@@ -49,30 +53,36 @@ p {
   margin-top: 56px;
   margin-bottom: 0;
   height: 134px;
-  width: 100%;
   line-height: 134px;
   vertical-align: center;
+  font-family: 'Cabin', 'Roboto', sans-serif;
   font-size: 36px;
 }
 
 .address-card {
-  float: right;
   height: 300px;
-  width: calc(100% - 425px);
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   margin-bottom: 20px;
   border-radius: 3px;
-  box-sizing: border-box;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.87);
 }
 
+div.address-card > div {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+div.address-card > div:last-child {
+  padding-right: 3vw;
+}
+
 .course-card {
   position: relative;
-  margin-right: 25px;
-  margin-bottom: 20px;
   height: 300px;
-  width: 400px;
-  display: inline-block;
+  margin-bottom: 20px;
   border-radius: 3px;
   box-sizing: border-box;
   overflow: hidden;
@@ -81,18 +91,22 @@ p {
 
 .card-image {
   float: left;
-  height: inherit;
+  height: 100%;
+  width: 100%;
   z-index: 1;
 }
 
 .card-info {
   position: absolute;
   z-index: 2;
-  padding: 5px 10px;
+  padding: 0 10px;
   height: 56px;
   width: 100%;
   box-sizing: border-box;
   background: rgba(245, 245, 245, 0.8);
+  line-height: 56px;
+  vertical-align: center;
+  overflow: hidden;
 }
 
 .detail-card {
@@ -100,23 +114,24 @@ p {
   padding: 1.5rem 2rem 3rem;
   height: auto;
   width: 100%;
-  display: inline-block;
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.8);
-  box-sizing: border-box;
+  overflow: auto;
 }
 
 .highlight-banner {
   height: 56px;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .highlight-title {
-  margin-left: calc((100% - 600px - 0.5rem) / 4);
+  margin-left: calc((100% - 600px) / 4);
   width: 200px;
   display: inline-block;
   line-height: 56px;
   text-align: center;
+  font-family: 'Cabin', 'Roboto', sans-serif;
 }
 
 .highlight {
@@ -158,11 +173,7 @@ p {
 }
 
 .par-card {
-  float: left;
-  margin-right: 25px;
   margin-bottom: 20px;
-  width: calc((100% - 50px) / 3);
-  box-sizing: border-box;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.87);
 }
@@ -172,7 +183,6 @@ p {
 }
 
 .par-title {
-  display: block;
   line-height: 56px;
 }
 
@@ -190,16 +200,27 @@ p {
 .scorecard {
   position: relative;
   padding: 40px;
-  box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.87);
   border-radius: 3px;
-  font-size: 1.2rem;
+  box-sizing: border-box;
+  font-family: 'Open Sans', 'Roboto', sans-serif;
+  font-size: 20px;
   overflow: auto;
 }
 
-.form-entry {
+form.scorecard > table > tbody > tr:nth-child(3n + 1) {
+  font-weight: bold;
+}
+
+form.scorecard > table > thead > tr > th {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 0;
+}
+
+td.form-entry {
   width: 9%;
-  padding: 0 30px 0 20px;
+  padding: 0 1px !important;
 }
 
 .form-left {
@@ -208,7 +229,6 @@ p {
 }
 
 .form-center {
-  font-size: 1rem !important;
   text-align: center;
 }
 
@@ -224,13 +244,24 @@ p {
 }
 
 .player-par {
+  margin: 0 !important;
+  padding: 0 !important;
   text-align: center;
+  font-size: 20px !important;
+  border: none !important;
+  background-color: #f5f5f5 !important;
 }
 
 .player-name,
 .player-score,
 .form-entry {
-  background-color: #eee;
+  background-color: #fff;
+}
+
+.player-par:focus {
+  background-color: #fff !important;
+  border-radius: 3px !important;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3) !important;
 }
 
 .player-name {
@@ -243,10 +274,13 @@ p {
   border-bottom-right-radius: 3px;
 }
 
+.recap-banner {
+  font-family: 'Cabin', 'Roboto', sans-serif;
+}
+
 .recap-table {
+  margin-top: 20px;
   font-size: 20px;
-  border-top: 1px solid #d0d0d0;
-  border-bottom: 1px solid #d0d0d0;
 }
 
 .recap-row:first-child > td {
@@ -254,6 +288,8 @@ p {
 }
 
 .recap-row:nth-child(3n + 1) {
+  margin: 5px 0;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -267,11 +303,13 @@ tr.recap-row > td {
 }
 
 tr.recap-row > td:first-child {
+  padding-left: 20px !important;
   font-weight: bold;
   text-align: left;
 }
 
 tr.recap-row > td:last-child {
+  padding-right: 20px !important;
   font-weight: bold;
   text-align: right;
 }

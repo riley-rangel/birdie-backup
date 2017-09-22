@@ -51,10 +51,22 @@ p {
 
 .address-card {
   height: 300px;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   margin-bottom: 20px;
   border-radius: 3px;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.87);
+}
+
+div.address-card > div {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+div.address-card > div:last-child {
+  padding-right: 3vw;
 }
 
 .course-card {

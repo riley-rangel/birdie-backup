@@ -119,21 +119,19 @@ div.address-card > div:last-child {
   overflow: auto;
 }
 
-.detail-card > h5 {
-  font-family: 'Cabin', 'Roboto', sans-serif;
-}
-
 .highlight-banner {
   height: 56px;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .highlight-title {
-  margin-left: calc((100% - 600px - 0.5rem) / 4);
+  margin-left: calc((100% - 600px) / 4);
   width: 200px;
   display: inline-block;
   line-height: 56px;
   text-align: center;
+  font-family: 'Cabin', 'Roboto', sans-serif;
 }
 
 .highlight {

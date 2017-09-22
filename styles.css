@@ -274,7 +274,12 @@ td.form-entry {
   border-bottom-right-radius: 3px;
 }
 
+.recap-banner {
+  font-family: 'Cabin', 'Roboto', sans-serif;
+}
+
 .recap-table {
+  margin-top: 20px;
   font-size: 20px;
 }
 
@@ -283,6 +288,8 @@ td.form-entry {
 }
 
 .recap-row:nth-child(3n + 1) {
+  margin: 5px 0;
+  font-size: 24px;
   font-weight: bold;
 }
 

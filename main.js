@@ -498,6 +498,7 @@ function renderRecap(roundData) {
   $recap.setAttribute('id', 'recap')
   $recapDiv.setAttribute('class', 'col s12')
   $recapCard.setAttribute('class', 'detail-card z-depth-2')
+  $recapBanner.setAttribute('class', 'recap-banner')
   $recapBanner.textContent = 'Well Done! You\'ve completed a round at ' +
     course.name
   $parDiv1.setAttribute('class', 'col s4')
@@ -545,7 +546,7 @@ function renderRecap(roundData) {
   $parCard2.append($scoreHeading2, $scoreContent2)
   $parCard3.append($scoreHeading3, $scoreContent3)
   $recapDiv.appendChild($recapCard)
-  $recapCard.append($table)
+  $recapCard.append($recapBanner, $table)
   $highlightDiv.appendChild($highlightCard)
   $highlightCard.append($highlightBanner, $highlight1, $highlight2, $highlight3)
   $highlightBanner.append($highlightTitle1, $highlightTitle2, $highlightTitle3)

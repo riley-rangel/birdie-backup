@@ -203,13 +203,24 @@ div.address-card > div:last-child {
   background-color: rgba(255, 255, 255, 0.87);
   border-radius: 3px;
   box-sizing: border-box;
-  font-size: 1.2rem;
+  font-family: 'Open Sans', 'Roboto', sans-serif;
+  font-size: 20px;
   overflow: auto;
 }
 
-.form-entry {
+form.scorecard > table > tbody > tr:nth-child(3n + 1) {
+  font-weight: bold;
+}
+
+form.scorecard > table > thead > tr > th {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 0;
+}
+
+td.form-entry {
   width: 9%;
-  padding: 0 30px 0 20px;
+  padding: 0 1px !important;
 }
 
 .form-left {
@@ -218,7 +229,6 @@ div.address-card > div:last-child {
 }
 
 .form-center {
-  font-size: 1rem !important;
   text-align: center;
 }
 
@@ -234,13 +244,24 @@ div.address-card > div:last-child {
 }
 
 .player-par {
+  margin: 0 !important;
+  padding: 0 !important;
   text-align: center;
+  font-size: 20px !important;
+  border: none !important;
+  background-color: #f5f5f5 !important;
 }
 
 .player-name,
 .player-score,
 .form-entry {
-  background-color: #eee;
+  background-color: #fff;
+}
+
+.player-par:focus {
+  background-color: #fff !important;
+  border-radius: 3px !important;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3) !important;
 }
 
 .player-name {

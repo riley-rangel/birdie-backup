@@ -359,7 +359,7 @@ function renderDetails(courseData) {
   var $highlight3 = document.createElement('div')
   var $descripDiv = document.createElement('div')
   var $descripCard = document.createElement('div')
-  var $about = document.createElement('h5')
+  var $about = document.createElement('h4')
   var $descripText = document.createElement('p')
 
   $div.setAttribute('id', 'main-' + courseData.id)

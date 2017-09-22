@@ -275,9 +275,7 @@ td.form-entry {
 }
 
 .recap-table {
-  font-size: 1.2rem;
-  border-top: 1px solid #d0d0d0;
-  border-bottom: 1px solid #d0d0d0;
+  font-size: 20px;
 }
 
 .recap-row:first-child > td {
@@ -298,11 +296,13 @@ tr.recap-row > td {
 }
 
 tr.recap-row > td:first-child {
+  padding-left: 20px !important;
   font-weight: bold;
   text-align: left;
 }
 
 tr.recap-row > td:last-child {
+  padding-right: 20px !important;
   font-weight: bold;
   text-align: right;
 }
